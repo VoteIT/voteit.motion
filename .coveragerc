@@ -1,0 +1,3 @@
+[run]
+source = voteit/motion
+omit = voteit/motion/test*
