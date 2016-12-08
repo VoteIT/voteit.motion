@@ -28,7 +28,7 @@ class MotionProcessSchema(colander.Schema):
     )
 
 
-class AddMotionSchema(colander.Schema):
+class MotionSchema(colander.Schema):
     title = colander.SchemaNode(
         colander.String(),
         title=_("Title"),
@@ -47,29 +47,25 @@ class AddMotionSchema(colander.Schema):
         description=_("Your motion text, excluding proposals"),
         widget=deform.widget.TextAreaWidget(rows=10),
     )
-
-
-class MotionProposalsSchema(colander.Schema):
     proposals = colander.SchemaNode(
         colander.Sequence(),
         colander.SchemaNode(
             colander.String(),
             name='not_used',
-            title=_("Proposal")
+            title=_("Proposal"),
+            widget=deform.widget.TextAreaWidget(rows=3),
         ),
-        title=_("Proposals"),
+        title=_("Proposals add at least one"),
         description=_("motion_proposals_schema_description",
                       default="Proposals must be written in a way so it's possible to approve or deny each one. "
                               "Don't give any background information or similar here."),
         widget=deform.widget.SequenceWidget(orderable=True),
+        default=[''],
+        validator=colander.Length(min=1,)
     )
 
 
 class MotionInviteSchema(colander.Schema):
-    pass
-
-
-class EditMotionSchema(MotionProposalsSchema, AddMotionSchema):
     pass
 
 
@@ -94,9 +90,6 @@ class EditEndorsementsSchema(colander.Schema):
 
 def includeme(config):
     config.add_schema('MotionProcess', MotionProcessSchema, ['add', 'edit'])
-    config.add_schema('Motion', AddMotionSchema, 'add')
-    config.add_schema('Motion', MotionProposalsSchema, 'proposals')
+    config.add_schema('Motion', MotionSchema, ('add', 'edit'))
     config.add_schema('Motion', MotionInviteSchema, 'invite')
-    # remove schema view
-    config.add_schema('Motion', EditMotionSchema, ('edit', 'view'))
     config.add_schema('Motion', EditEndorsementsSchema, 'endorsements')
