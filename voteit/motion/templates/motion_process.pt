@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="view.macro('arche:templates/base_view.pt')"
+      i18n:domain="voteit.motion">
+<body>
+<tal:main metal:fill-slot="main-content">
+
+    <table class="table table-responsive table-bordered table-striped table-hover sortable-table">
+        <thead>
+            <tr>
+                <th i18n:translate="">Title</th>
+                <th i18n:translate="">Author</th>
+                <th i18n:translate="">State</th>
+                <th i18n:translate="">Created</th>
+                <th i18n:translate="">Endorsements</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr tal:repeat="obj view.get_motions()">
+                <td>
+                    <a href="${request.resource_url(obj)}">
+                    ${obj.title}
+                    </a>
+                </td>
+                <td>
+                    ${structure: request.creators_info(obj.creator, no_tag=True)}
+                </td>
+                <td>
+                    <span class="workflow-${obj.workflow.name} wf-state wf-state-${obj.wf_state}">
+                    ${obj.workflow.state_title}
+                    </span>
+                </td>
+                <td>
+                    ${request.dt_handler.format_dt(obj.created)}
+                </td>
+                <td>
+                    ${len(obj.endorsements)}
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                    <span tal:condition="obj.endorsements_text"
+                          class="glyphicon glyphicon-comment"></span>
+                    <a tal:condition="request.has_permission('perm:Edit', obj)"
+                       href="${request.resource_url(obj, 'edit_endorsements', query={'came_from': request.resource_url(context)})}">
+                       <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <script>
+        $(function () {
+          $('[data-toggle="popover"]').popover()
+        })
+    </script>
+</tal:main>
+</body>
+</html>
