@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import colander
 import deform
 from arche.widgets import deferred_autocompleting_userid_widget
+#from voteit.core.schemas.common import strip_and_lowercase
 
 from voteit.motion import _
 
@@ -65,8 +66,20 @@ class MotionSchema(colander.Schema):
     )
 
 
-class MotionInviteSchema(colander.Schema):
-    pass
+# class MotionInviteSchema(colander.Schema):
+#     emails = colander.SchemaNode(
+#         colander.Sequence(),
+#         colander.SchemaNode(
+#             colander.String(),
+#             name='not_used',
+#             title=_("Email"),
+#             validator=colander.Email(),
+#             preparer=strip_and_lowercase,
+#         ),
+#         title=_("Email addresses to send invitation to"),
+#         widget=deform.widget.SequenceWidget(orderable=True),
+#         default=[''],
+#     )
 
 
 class EditEndorsementsSchema(colander.Schema):
@@ -91,5 +104,5 @@ class EditEndorsementsSchema(colander.Schema):
 def includeme(config):
     config.add_schema('MotionProcess', MotionProcessSchema, ['add', 'edit'])
     config.add_schema('Motion', MotionSchema, ('add', 'edit'))
-    config.add_schema('Motion', MotionInviteSchema, 'invite')
+    #config.add_schema('Motion', MotionInviteSchema, 'invite')
     config.add_schema('Motion', EditEndorsementsSchema, 'endorsements')
