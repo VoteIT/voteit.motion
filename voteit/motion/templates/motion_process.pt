@@ -50,11 +50,6 @@
 
         </tbody>
     </table>
-    <script>
-        $(function () {
-          $('[data-toggle="popover"]').popover()
-        })
-    </script>
 </tal:main>
 </body>
 </html>
