@@ -1,0 +1,15 @@
+.wf-state.wf-state-draft {
+  color: #d9534f;
+}
+.wf-state.wf-state-review {
+  color: #f0ad4e;
+}
+.wf-state.wf-state-published {
+  color: #337ab7;
+}
+.wf-state.wf-state-lacked_endorsement {
+  color: #777;
+}
+.wf-state.wf-state-endorsed {
+  color: #5cb85c;
+}

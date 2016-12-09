@@ -39,7 +39,7 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
     endorsements_text = ""
     _proposals = ()
     _creator = ()
-    _endorsements = ()
+    _endorsements = {}
 
     @property
     def proposals(self):

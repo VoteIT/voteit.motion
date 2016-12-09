@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="view.macro('arche:templates/base_view.pt')"
+      i18n:domain="voteit.motion">
+<body>
+<tal:main metal:fill-slot="main-content">
+    <div class="page-header">
+        <h1>
+            ${context.title}
+            <a href="${request.resource_url(context, 'edit')}"
+               tal:condition="can_edit"
+               class="btn btn-success pull-right" i18n:translate="">
+                Edit motion
+            </a>
+        </h1>
+    </div>
+
+    <p class="lead" tal:condition="context.description">${context.description}</p>
+
+    <p>
+        <tal:ts i18n:translate="">By:</tal:ts>
+        ${structure: request.creators_info(context.creator, no_tag=True, portrait=False)}
+    </p>
+    <p>
+        <tal:ts i18n:translate="">Status:</tal:ts>
+        <span class="workflow-${context.workflow.name} wf-state wf-state-${context.wf_state}">
+            ${context.workflow.state_title}
+        </span>
+    </p>
+    <hr/>
+
+    <h3 i18n:translate="">Motion text</h3>
+
+    <div class="body">
+        ${structure: view.format_text(context.body)}
+    </div>
+
+    <hr/>
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <h3>
+                <span i18n:translate="">Proposals</span>
+            </h3>
+            <div class="list-group">
+                <div class="list-group-item" tal:repeat="text context.proposals">
+                    ${structure: view.format_text(text)}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <h3>
+                <span i18n:translate="">Endorsements</span>
+            </h3>
+            <ul>
+
+                <li tal:repeat="(userid, timestamp) context.endorsements_info">
+                    ${structure: request.creators_info(context.creator, no_tag=True, portrait=False)}<br/>
+                    <span class="text-muted">${request.dt_handler.format_dt(timestamp)}</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div tal:condition="can_submit">
+        <p>
+            <strong i18n:translate="submit_for_review_warning">Note: You will not be able to make changes after the motion is submitted for review!</strong>
+        </p>
+        <p>
+        <a href="${request.resource_url(context, '__wf_transition__', query = {'id': 'review', 'return_url': request.url})}"
+           class="btn btn-warning"
+           i18n:translate="">Submit for review</a>
+        </p>
+
+    </div>
+
+</tal:main>
+</body>
+</html>
