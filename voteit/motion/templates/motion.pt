@@ -58,7 +58,6 @@
                 <span i18n:translate="">Endorsements</span>
             </h3>
             <ul>
-
                 <li tal:repeat="(userid, timestamp) context.endorsements_info">
                     ${structure: request.creators_info(context.creator, no_tag=True, portrait=False)}<br/>
                     <span class="text-muted">${request.dt_handler.format_dt(timestamp)}</span>
@@ -77,8 +76,45 @@
            class="btn btn-warning"
            i18n:translate="">Submit for review</a>
         </p>
-
     </div>
+
+    <tal:sharing_on condition="context.sharing_token">
+
+        <p i18n:translate="share_link_explanation">To share this motion with anonymous users, send them this link.
+            It's also possible to share thing link on social media and similar</p>
+
+        <code>
+            ${request.resource_url(context, '_ts', context.sharing_token)}
+        </code>
+
+        <br/><br/>
+
+        <p i18n:translate="disable_sharing_explanation" class="text-muted">
+            If you want to stop the link above from working you may do so.
+        </p>
+        <p>
+            <a href="${request.resource_url(context, 'toggle_sharing', query={'s': 'off'})}"
+                class="text-danger"
+                i18n:translate="switch_sharing_on_btn">
+                Switch off sharing and disable link
+            </a>
+        </p>
+    </tal:sharing_on>
+    <tal:sharing_off condition="not context.sharing_token">
+
+        <p i18n:translate="enable_sharing_explanation">
+            You may create a link where anonymous users can read this motion.
+            If you wish to do so, click the link below. A link will be generated. Send that link to other users.
+        </p>
+        <p>
+            <a href="${request.resource_url(context, 'toggle_sharing', query={'s': 'on'})}"
+               class="text-warning"
+                i18n:translate="switch_sharing_on_btn">
+                Enable sharing
+            </a>
+        </p>
+
+    </tal:sharing_off>
 
 </tal:main>
 </body>

@@ -1,5 +1,8 @@
 from __future__ import unicode_literals
 
+import string
+from random import choice
+
 from BTrees.OOBTree import OOBTree
 from arche.api import Content
 from arche.api import ContextACLMixin
@@ -37,6 +40,7 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
     css_icon = "glyphicon glyphicon-list-alt"
     body = ""
     endorsements_text = ""
+    sharing_token = None
     _proposals = ()
     _creator = ()
     _endorsements = {}
@@ -77,6 +81,13 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
     @property
     def endorsements_info(self):
         return self._endorsements.items()
+
+    def enable_sharing_token(self):
+        self.sharing_token = "".join([choice(string.letters + string.digits) for x in range(15)])
+        return self.sharing_token
+
+    def remove_sharing_token(self):
+        self.sharing_token = None
 
 
 def includeme(config):

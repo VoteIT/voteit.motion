@@ -6,6 +6,7 @@ from voteit.core import security
 from voteit.motion import _
 
 from voteit.motion.permissions import ADD_MOTION
+from voteit.motion.permissions import ENABLE_MOTION_SHARING
 from voteit.motion.permissions import ADMIN_PERMS
 from voteit.motion.permissions import EDITOR_PERMS
 
@@ -71,7 +72,7 @@ class MotionWorkflow(Workflow):
             acl_entry.add(security.ROLE_ADMIN, ADMIN_PERMS)
             acl_entry.add(ROLE_EDITOR, EDITOR_PERMS)
             acl_entry.add(ROLE_AUTHENTICATED, [security.VIEW])
-            acl_entry.add(security.ROLE_OWNER, security.VIEW)
+            acl_entry.add(security.ROLE_OWNER, [security.VIEW, ENABLE_MOTION_SHARING])
         registry.acl[cls.name+':draft'].add(security.ROLE_OWNER,
                                             [security.EDIT, security.CHANGE_WORKFLOW_STATE])
 
