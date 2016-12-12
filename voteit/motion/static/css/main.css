@@ -5,7 +5,7 @@
 .wf-state.wf-state-review {
   color: #f0ad4e;
 }
-.wf-state.wf-state-published {
+.wf-state.wf-state-awaiting_endorsement {
   color: #337ab7;
 }
 .wf-state.wf-state-lacked_endorsement {

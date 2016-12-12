@@ -67,9 +67,9 @@ class MotionWorkflow(Workflow):
     title = _("Motion workflow")
     states = {'draft': _("Draft"),
               'review': _("Under review"),
-              'published': _("Published"),
-              'lacked_endorsement': _("Lacked endorsement"),
-              'endorsed': _("Has endorsement")}
+              'awaiting_endorsement': _("Awaiting endorsements"),
+              'lacked_endorsement': _("Lacked enough endorsements"),
+              'endorsed': _("Has enough endorsements")}
     transitions = {}
     initial_state = 'draft'
 
@@ -104,9 +104,9 @@ MotionWorkflow.add_transitions(
 
 MotionWorkflow.add_transitions(
     from_states='*',
-    to_states='published',
+    to_states='awaiting_endorsement',
     permission=security.CHANGE_WORKFLOW_STATE,
-    title=_("Publish"),
+    title=_("Set as awaiting endorsements"),
 )
 
 
