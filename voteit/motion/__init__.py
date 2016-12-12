@@ -5,8 +5,8 @@ _ = TranslationStringFactory('voteit.motion')
 
 def includeme(config):
     config.include('.fanstatic_lib')
-    config.include('.models')
     config.include('.resources')
+    config.include('.security')
     config.include('.schemas')
     config.include('.views')
     config.include('.workflows')

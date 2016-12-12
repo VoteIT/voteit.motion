@@ -12,8 +12,9 @@
             ${context.title}
             <a href="${request.resource_url(context, 'edit')}"
                tal:condition="can_edit"
-               class="btn btn-success pull-right" i18n:translate="">
-                Edit motion
+               class="btn btn-success pull-right">
+                <span class="glyphicon glyphicon-edit"></span>
+                <tal:ts i18n:translate="">Edit motion</tal:ts>
             </a>
         </h1>
     </div>
@@ -22,12 +23,12 @@
 
     <p>
         <tal:ts i18n:translate="">By:</tal:ts>
-        ${structure: request.creators_info(context.creator, no_tag=True, portrait=False)}
+        <b>${structure: request.creators_info(context.creator, no_tag=True, portrait=False)}</b>
     </p>
     <p>
         <tal:ts i18n:translate="">Status:</tal:ts>
         <span class="workflow-${context.workflow.name} wf-state wf-state-${context.wf_state}">
-            ${context.workflow.state_title}
+            <b>${context.workflow.state_title}</b>
         </span>
     </p>
     <hr/>
@@ -63,9 +64,12 @@
                     <span class="text-muted">${request.dt_handler.format_dt(timestamp)}</span>
                 </li>
             </ul>
+
         </div>
 
     </div>
+
+    <hr/>
 
     <div tal:condition="can_submit">
         <p>
@@ -81,7 +85,7 @@
     <tal:sharing_on condition="context.sharing_token">
 
         <p i18n:translate="share_link_explanation">To share this motion with anonymous users, send them this link.
-            It's also possible to share thing link on social media and similar</p>
+            It's also possible to share this link on social media and similar</p>
 
         <code>
             ${request.resource_url(context, '_ts', context.sharing_token)}
@@ -89,18 +93,20 @@
 
         <br/><br/>
 
-        <p i18n:translate="disable_sharing_explanation" class="text-muted">
-            If you want to stop the link above from working you may do so.
-        </p>
-        <p>
-            <a href="${request.resource_url(context, 'toggle_sharing', query={'s': 'off'})}"
-                class="text-danger"
-                i18n:translate="switch_sharing_on_btn">
-                Switch off sharing and disable link
-            </a>
-        </p>
+        <tal:controls condition="can_enable_sharing">
+            <p i18n:translate="disable_sharing_explanation" class="text-muted">
+                If you want to stop the link above from working you may do so.
+            </p>
+            <p>
+                <a href="${request.resource_url(context, 'toggle_sharing', query={'s': 'off'})}"
+                    class="text-danger"
+                    i18n:translate="switch_sharing_on_btn">
+                    Switch off sharing and disable link
+                </a>
+            </p>
+        </tal:controls>
     </tal:sharing_on>
-    <tal:sharing_off condition="not context.sharing_token">
+    <tal:sharing_off condition="can_enable_sharing and not context.sharing_token">
 
         <p i18n:translate="enable_sharing_explanation">
             You may create a link where anonymous users can read this motion.

@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 import colander
 import deform
-from arche.widgets import deferred_autocompleting_userid_widget
+from arche.widgets import deferred_autocompleting_userid_widget, ReferenceWidget
 #from voteit.core.schemas.common import strip_and_lowercase
 
 from voteit.motion import _
@@ -26,6 +26,20 @@ class MotionProcessSchema(colander.Schema):
         missing="",
         description=_("Describe the process etc..."),
         widget=deform.widget.RichTextWidget(),
+    )
+    hashlist_uids = colander.SchemaNode(
+        colander.Sequence(),
+        colander.SchemaNode(
+            colander.String(),
+            name='not_used', #but required...
+            title=_("Hashlists"),
+            widget=ReferenceWidget(query_params={'type_name': 'HashList'}, multiple=False)
+        ),
+        title=_("hashlist_uids_schema_title",
+                default="Users in this hashlist may gain permission to participate"),
+        description=_("hashlist_uids_schema_description",
+                      default="Requires package arche_hashlist to work. Users will need to "
+                      "have their email address validated + pass a check against the hashlist.")
     )
 
 

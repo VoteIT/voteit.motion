@@ -50,6 +50,25 @@
 
         </tbody>
     </table>
+
+    <p>
+        <tal:ts i18n:translate="">Motion process is currently:</tal:ts>
+        <span class="workflow-${context.workflow.name} wf-state wf-state-${context.wf_state}">
+            ${context.workflow.state_title}
+        </span>
+    </p>
+
+
+    <p tal:condition="check_email_snippet" tal:content="structure check_email_snippet">Check email btn</p>
+
+    <tal:add_motion condition="can_add_motion">
+        <a href="${request.resource_url(context, 'add', query={'content_type': 'Motion'})}"
+            class="btn btn-success">
+            <span class="glyphicon glyphicon-list-alt"></span>
+            <tal:ts i18n:translate="">Add motion</tal:ts>
+        </a>
+    </tal:add_motion>
+
 </tal:main>
 </body>
 </html>

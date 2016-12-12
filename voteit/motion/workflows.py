@@ -1,21 +1,25 @@
 from __future__ import unicode_literals
 
 from arche.models.workflow import Workflow
-from arche.security import ROLE_EDITOR, ROLE_AUTHENTICATED
+from arche.security import ROLE_AUTHENTICATED
+from arche.security import ROLE_EDITOR
 from voteit.core import security
-from voteit.motion import _
 
+from voteit.motion import _
 from voteit.motion.permissions import ADD_MOTION
+from voteit.motion.permissions import CHECK_EMAIL_AGAINST_HASHLIST
 from voteit.motion.permissions import ENABLE_MOTION_SHARING
 from voteit.motion.permissions import ADMIN_PERMS
+from voteit.motion.permissions import ENDORSE_MOTION
 from voteit.motion.permissions import EDITOR_PERMS
+from voteit.motion.security import ROLE_MOTION_PROCESS_PARTICIPANT
 
 
 class MotionProcessWorkflow(Workflow):
     name = 'motion_process_workflow'
     title = _("Motion process workflow")
     states = {'private': _("Private"),
-              'open': _("Public"),
+              'open': _("Open"),
               'closed': _("Closed")}
     transitions = {}
     initial_state = 'private'
@@ -28,6 +32,9 @@ class MotionProcessWorkflow(Workflow):
             acl_entry.add(ROLE_EDITOR, EDITOR_PERMS)
             if sname != 'private':
                 acl_entry.add(ROLE_AUTHENTICATED, [security.VIEW])
+            if sname == 'open':
+                acl_entry.add(ROLE_MOTION_PROCESS_PARTICIPANT, [ADD_MOTION])
+                acl_entry.add(ROLE_AUTHENTICATED, [CHECK_EMAIL_AGAINST_HASHLIST])
 
 
 MotionProcessWorkflow.add_transitions(
@@ -71,8 +78,10 @@ class MotionWorkflow(Workflow):
             acl_entry = registry.acl.new_acl(cls.name + ':' + sname)
             acl_entry.add(security.ROLE_ADMIN, ADMIN_PERMS)
             acl_entry.add(ROLE_EDITOR, EDITOR_PERMS)
-            acl_entry.add(ROLE_AUTHENTICATED, [security.VIEW])
             acl_entry.add(security.ROLE_OWNER, [security.VIEW, ENABLE_MOTION_SHARING])
+            if sname != 'lacked_endorsement':
+                acl_entry.add(ROLE_MOTION_PROCESS_PARTICIPANT, [ENDORSE_MOTION])
+
         registry.acl[cls.name+':draft'].add(security.ROLE_OWNER,
                                             [security.EDIT, security.CHANGE_WORKFLOW_STATE])
 

@@ -3,6 +3,8 @@ from voteit.core import security
 
 ADD_MOTION_PROCESS = "Add motion process"
 ADD_MOTION = "Add motion"
+ENDORSE_MOTION = "Endorse motion"
+CHECK_EMAIL_AGAINST_HASHLIST = "Check email against hashlist"
 ENABLE_MOTION_SHARING = "Enable motion sharing"
 
 
@@ -18,5 +20,7 @@ EDITOR_PERMS = [
 ADMIN_PERMS = [
     security.PERM_MANAGE_USERS
 ]
+
+
 ADMIN_PERMS.extend(EDITOR_PERMS)
 
