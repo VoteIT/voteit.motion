@@ -54,7 +54,7 @@
     <p>
         <tal:ts i18n:translate="">Motion process is currently:</tal:ts>
         <span class="workflow-${context.workflow.name} wf-state wf-state-${context.wf_state}">
-            ${context.workflow.state_title}
+            <b>${context.workflow.state_title}</b>
         </span>
     </p>
 

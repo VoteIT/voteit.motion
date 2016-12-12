@@ -60,11 +60,33 @@
             </h3>
             <ul>
                 <li tal:repeat="(userid, timestamp) context.endorsements_info">
-                    ${structure: request.creators_info(context.creator, no_tag=True, portrait=False)}<br/>
+                    ${structure: request.creators_info([userid], no_tag=True, portrait=False)}<br/>
                     <span class="text-muted">${request.dt_handler.format_dt(timestamp)}</span>
                 </li>
             </ul>
+            <div tal:condition="context.endorsements_text">
+                <hr/>
+                <h4 i18n:translate="">Other endorsements:</h4>
+                ${structure: context.endorsements_text}
+            </div>
 
+            <div tal:content="structure check_email_snippet">Check email btn</div>
+
+            <div tal:condition="can_endorse">
+                <hr/>
+                <a class="btn btn-success"
+                   href="${request.resource_url(context, 'endorsement', query={'s': 'yes', 'came_from': request.url})}"
+                   tal:condition="request.authenticated_userid not in context.endorsements">
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                    <tal:ts i18n:translate="">Endorse motion</tal:ts>
+                </a>
+                <a class="btn btn-warning"
+                   href="${request.resource_url(context, 'endorsement', query={'s': 'no',  'came_from': request.url})}"
+                   tal:condition="request.authenticated_userid in context.endorsements">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <tal:ts i18n:translate="">No longer endorse motion</tal:ts>
+                </a>
+            </div>
         </div>
 
     </div>

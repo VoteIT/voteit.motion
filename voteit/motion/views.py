@@ -59,6 +59,8 @@ class MotionView(BaseView):
                      self.request.has_permission(CHANGE_WORKFLOW_STATE, self.context)
         return {'can_submit': can_submit,
                 'can_edit': self.request.has_permission(EDIT, self.context),
+                'can_endorse': self.request.authenticated_userid not in self.context.creator and
+                               self.request.has_permission(ENDORSE_MOTION, self.context),
                 'can_enable_sharing': ENABLE_MOTION_SHARING,
                 'check_email_snippet': render_check_email_snippet(self.context, self.request)}
 
@@ -88,6 +90,30 @@ class MotionView(BaseView):
             self.flash_messages.add(_("sharing_switched_off",
                                       default="Sharing switched off - motion not accessible unless you're logged in."),
                                     type='warning')
+        return HTTPFound(location=self.request.resource_url(self.context))
+
+    @view_config(name="endorsement", permission=ENDORSE_MOTION)
+    def set_endorsement(self):
+        state = self.request.GET.get('s', None)
+        came_from = self.request.GET.get('came_from', None)
+        endorsements = set(self.context.endorsements)
+        userid = self.request.authenticated_userid
+        if state == 'yes':
+            if userid not in endorsements:
+                endorsements.add(userid)
+                self.context.endorsements = endorsements
+            self.flash_messages.add(_("youre_now_endorsing",
+                                      default="You're now endorsing this motion."),
+                                    type='success')
+        if state == 'no':
+            if userid in endorsements:
+                endorsements.remove(userid)
+                self.context.endorsements = endorsements
+            self.flash_messages.add(_("your_endorsement_removed",
+                                      default="You're no longer endorsing this motion."),
+                                    type='warning')
+        if came_from:
+            return HTTPFound(location=came_from)
         return HTTPFound(location=self.request.resource_url(self.context))
 
 
@@ -135,13 +161,10 @@ def render_check_email_snippet(context, request):
         return ''
     if request.profile is None:
         return ''
-    already_allowed = sum([
-        request.has_permission(ENDORSE_MOTION, context),
-        request.has_permission(ADD_MOTION, context)
-    ])
+    already_has_role = ROLE_MOTION_PROCESS_PARTICIPANT in mp.local_roles.get(request.authenticated_userid, ())
     values = {'context': context,
               'can_check': request.has_permission(CHECK_EMAIL_AGAINST_HASHLIST, mp) and
-                           not already_allowed,
+                           not already_has_role,
               'check_url': request.resource_url(mp, 'check_email',
                                                 query={'came_from': request.resource_url(context)})}
     return render('voteit.motion:templates/check_email.pt', values, request=request)

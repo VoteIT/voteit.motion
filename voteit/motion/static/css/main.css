@@ -1,4 +1,5 @@
-.wf-state.wf-state-draft {
+.wf-state.wf-state-draft,
+.wf-state.wf-state-private {
   color: #d9534f;
 }
 .wf-state.wf-state-review {
@@ -10,6 +11,7 @@
 .wf-state.wf-state-lacked_endorsement {
   color: #777;
 }
-.wf-state.wf-state-endorsed {
+.wf-state.wf-state-endorsed,
+.wf-state.wf-state-open {
   color: #5cb85c;
 }

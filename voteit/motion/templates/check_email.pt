@@ -4,13 +4,16 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="voteit.motion">
 
-<p tal:condition="can_check">
+<div tal:condition="can_check">
+    <hr/>
     <tal:ts i18n:translate="check_credentials_explanation">
-        Check your email address against
+        Check your permissions to participate in the motion process.
     </tal:ts>
-    <a href="${check_url}" class="btn btn-success"
-       i18n:translate="">Check credentials</a>
-</p>
+    <p>
+        <a href="${check_url}" class="btn btn-success"
+           i18n:translate="">Check</a>
+    </p>
+</div>
 
 
 </tal:main>

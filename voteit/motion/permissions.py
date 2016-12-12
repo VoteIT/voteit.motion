@@ -1,6 +1,5 @@
 from voteit.core import security
 
-
 ADD_MOTION_PROCESS = "Add motion process"
 ADD_MOTION = "Add motion"
 ENDORSE_MOTION = "Endorse motion"
@@ -12,6 +11,7 @@ EDITOR_PERMS = [
     security.CHANGE_WORKFLOW_STATE,
     security.EDIT,
     security.VIEW,
+    security.DELETE,
     ADD_MOTION,
     ENABLE_MOTION_SHARING,
 ]
