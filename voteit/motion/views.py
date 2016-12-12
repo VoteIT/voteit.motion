@@ -35,9 +35,11 @@ class MotionProcessView(BaseView):
                 'check_email_snippet': render_check_email_snippet(self.context, self.request)}
 
     def get_motions(self):
+        res = []
         for obj in self.context.values():
             if IMotion.providedBy(obj) and self.request.has_permission(VIEW, obj):
-                yield obj
+                res.append(obj)
+        return res
 
 
 @view_config(context=IMotion,
@@ -61,7 +63,7 @@ class MotionView(BaseView):
                 'can_edit': self.request.has_permission(EDIT, self.context),
                 'can_endorse': self.request.authenticated_userid not in self.context.creator and
                                self.request.has_permission(ENDORSE_MOTION, self.context),
-                'can_enable_sharing': ENABLE_MOTION_SHARING,
+                'can_enable_sharing': self.request.has_permission(ENABLE_MOTION_SHARING, self.context),
                 'check_email_snippet': render_check_email_snippet(self.context, self.request)}
 
     @view_config(name='_ts', permission=NO_PERMISSION_REQUIRED)
