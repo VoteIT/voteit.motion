@@ -149,6 +149,14 @@
 
     </tal:sharing_off>
 
+    <p tal:condition="request.has_permission('perm:View', context.__parent__)">
+        <hr/>
+        <a href="${request.resource_url(context.__parent__)}"
+           class="btn btn-default"
+           i18n:translate="">Back</a>
+    </p>
+
+
 </tal:main>
 </body>
 </html>
