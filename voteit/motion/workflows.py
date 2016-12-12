@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from arche.models.workflow import Workflow
 from arche.security import ROLE_AUTHENTICATED
 from arche.security import ROLE_EDITOR
+from arche.security import ROLE_EVERYONE
 from voteit.core import security
 
 from voteit.motion import _
@@ -31,7 +32,7 @@ class MotionProcessWorkflow(Workflow):
             acl_entry.add(security.ROLE_ADMIN, ADMIN_PERMS)
             acl_entry.add(ROLE_EDITOR, EDITOR_PERMS)
             if sname != 'private':
-                acl_entry.add(ROLE_AUTHENTICATED, [security.VIEW])
+                acl_entry.add(ROLE_EVERYONE, [security.VIEW])
             if sname == 'open':
                 acl_entry.add(ROLE_MOTION_PROCESS_PARTICIPANT, [ADD_MOTION])
                 acl_entry.add(ROLE_AUTHENTICATED, [CHECK_EMAIL_AGAINST_HASHLIST])
