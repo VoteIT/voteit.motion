@@ -8,7 +8,9 @@
 <body>
 <tal:main metal:fill-slot="main-content">
 
-    <table class="table table-responsive table-bordered table-striped table-hover sortable-table">
+    <table tal:define="motions view.get_motions()"
+           tal:condition="motions"
+           class="table table-responsive table-bordered table-striped table-hover sortable-table">
         <thead>
             <tr>
                 <th i18n:translate="">Title</th>
@@ -19,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr tal:repeat="obj view.get_motions()">
+            <tr tal:repeat="obj motions">
                 <td>
                     <a href="${request.resource_url(obj)}">
                     ${obj.title}
@@ -58,6 +60,9 @@
         </span>
     </p>
 
+    <p tal:condition="not request.authenticated_userid" i18n:translate="">
+        To participate in the motion process, you need to be logged in!
+    </p>
 
     <p tal:condition="check_email_snippet" tal:content="structure check_email_snippet">Check email btn</p>
 

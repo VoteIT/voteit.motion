@@ -70,6 +70,11 @@
                 ${structure: context.endorsements_text}
             </div>
 
+            <div tal:condition="not request.authenticated_userid">
+                <hr/>
+                <p i18n:translate="">You need to login to interact with this motion</p>
+            </div>
+
             <div tal:content="structure check_email_snippet">Check email btn</div>
 
             <div tal:condition="can_endorse">
