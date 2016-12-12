@@ -15,5 +15,11 @@
     </p>
 </div>
 
+<div tal:condition="not request.profile.email_validated|None">
+    <hr/>
+    <tal:ts i18n:translate="validate_email_address_msg">Your email address isn't validated.
+        Use the link in the user menu to do so. </tal:ts>
+</div>
+
 
 </tal:main>
