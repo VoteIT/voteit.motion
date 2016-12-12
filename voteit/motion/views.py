@@ -164,11 +164,15 @@ def render_check_email_snippet(context, request):
     if request.profile is None:
         return ''
     already_has_role = ROLE_MOTION_PROCESS_PARTICIPANT in mp.local_roles.get(request.authenticated_userid, ())
+    if context.sharing_token:
+        came_from = request.resource_url(context, '_ts', context.sharing_token)
+    else:
+        came_from = request.resource_url(context)
     values = {'context': context,
               'can_check': request.has_permission(CHECK_EMAIL_AGAINST_HASHLIST, mp) and
-                           not already_has_role,
+                           not already_has_role and request.profile.email_validated,
               'check_url': request.resource_url(mp, 'check_email',
-                                                query={'came_from': request.resource_url(context)})}
+                                                query={'came_from': came_from})}
     return render('voteit.motion:templates/check_email.pt', values, request=request)
 
 
