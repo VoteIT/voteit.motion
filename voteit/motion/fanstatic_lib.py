@@ -10,12 +10,10 @@ from js.bootstrap import bootstrap_css
 library = Library('voteit_motion', 'static')
 
 voteitmotion_css = Resource(library, 'css/main.css', depends = (bootstrap_css,))
-#voteitmotion_scripts = Resource(library, 'js/scripts.js', depends=(bootstrap_js, common_js))
 
 
 def need_subscriber(view, event):
     voteitmotion_css.need()
-  #  voteitmotion_scripts.need()
 
 
 def includeme(config):
