@@ -27,7 +27,7 @@ class MotionProcess(Content, ContextACLMixin, LocalRolesMixin):
     add_permission = ADD_MOTION_PROCESS
     css_icon = "glyphicon glyphicon-inbox"
     body = ""
-    _hashlist_uid = ()
+    _hashlist_uids = ()
 
     @property
     def hashlist_uids(self):
