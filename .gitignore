@@ -7,6 +7,7 @@
 .Python
 .installed.cfg
 .mr.developer.cfg
+*~
 bin
 develop-eggs
 dist

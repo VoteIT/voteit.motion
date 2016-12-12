@@ -1,0 +1,325 @@
+#
+# SOME DESCRIPTIVE TITLE
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE 1.0\n"
+"POT-Creation-Date: 2016-12-12 15:07+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"Generated-By: Lingua 4.9\n"
+
+#: ././voteit/motion/resources.py:26
+msgid "Motion process"
+msgstr ""
+
+#: ././voteit/motion/resources.py:46
+msgid "Motion"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:14 ././voteit/motion/schemas.py:49
+#: ././voteit/motion/templates/motion_process.pt:16
+msgid "Title"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:18
+msgid "Description"
+msgstr ""
+
+#. Default: Short description, visible as lead-in and on searches.
+#: ././voteit/motion/schemas.py:20
+msgid "motion_process_schema_description"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:25 ././voteit/motion/schemas.py:60
+msgid "Text body"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:27
+msgid "Describe the process etc..."
+msgstr ""
+
+#: ././voteit/motion/schemas.py:35
+msgid "Hashlists"
+msgstr ""
+
+#. Default: Users in this hashlist may gain permission to participate
+#: ././voteit/motion/schemas.py:38
+msgid "hashlist_uids_schema_title"
+msgstr ""
+
+#. Default: Requires package arche_hashlist to work. Users will need to have
+#. their email address validated + pass a check against the hashlist.
+#: ././voteit/motion/schemas.py:40
+msgid "hashlist_uids_schema_description"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:53
+msgid "Short description"
+msgstr ""
+
+#. Default: Visible as lead-in and on searches. Keep it very short!
+#: ././voteit/motion/schemas.py:55
+msgid "motion_schema_description"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:62
+msgid "Your motion text, excluding proposals"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:70
+msgid "Proposal"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:73
+msgid "Proposals add at least one"
+msgstr ""
+
+#. Default: Proposals must be written in a way so it's possible to approve or
+#. deny each one. Don't give any background information or similar here.
+#: ././voteit/motion/schemas.py:74
+msgid "motion_proposals_schema_description"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:105
+msgid "UserID"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:111
+msgid "Written endorsements"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:112
+msgid "From non-users."
+msgstr ""
+
+#: ././voteit/motion/security.py:9
+msgid "Participate motion proc."
+msgstr ""
+
+#. Default: Sharing enalbed - use the link below.
+#: ././voteit/motion/views.py:87
+msgid "sharing_switched_on"
+msgstr ""
+
+#. Default: Sharing switched off - motion not accessible unless you're logged
+#. in.
+#: ././voteit/motion/views.py:92
+msgid "sharing_switched_off"
+msgstr ""
+
+#. Default: You're now endorsing this motion.
+#: ././voteit/motion/views.py:107
+msgid "youre_now_endorsing"
+msgstr ""
+
+#. Default: You're no longer endorsing this motion.
+#: ././voteit/motion/views.py:114
+msgid "your_endorsement_removed"
+msgstr ""
+
+#: ././voteit/motion/views.py:131
+msgid "Must be logged in"
+msgstr ""
+
+#. Default: You need to have a validated email address to use this. Validate
+#. your email on the profile page.
+#: ././voteit/motion/views.py:133
+msgid "no_validated_email_error"
+msgstr ""
+
+#. Default: You've been granted access to add motions (if process is open) and
+#. to endorse motions
+#: ././voteit/motion/views.py:146
+msgid "granted_access_message"
+msgstr ""
+
+#. Default: We couldn't find your email address. Please contact the
+#. organisation responsible for this process to gain access.
+#: ././voteit/motion/views.py:151
+msgid "not_found_when_checked_against_hashlist"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:21
+msgid "Motion process workflow"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:22
+msgid "Private"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:23
+msgid "Open"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:24
+msgid "Closed"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:45
+msgid "Make private"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:53
+msgid "Close process"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:61
+msgid "Open process"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:67
+msgid "Motion workflow"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:68
+msgid "Draft"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:69
+msgid "Under review"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:70
+msgid "Published"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:71 ././voteit/motion/workflows.py:117
+msgid "Lacked endorsement"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:72
+msgid "Has endorsement"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:93
+msgid "Set as draft"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:101
+msgid "Set as under review"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:109
+msgid "Publish"
+msgstr ""
+
+#: ././voteit/motion/workflows.py:125
+msgid "Has enough endorsements"
+msgstr ""
+
+#. Default: Check your permissions to participate in the motion process.
+#: ././voteit/motion/templates/check_email.pt:9
+msgid "check_credentials_explanation"
+msgstr ""
+
+#: ././voteit/motion/templates/check_email.pt:14
+msgid "Check"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:17
+msgid "Edit motion"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:25
+msgid "By:"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:29
+msgid "Status:"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:36
+msgid "Motion text"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:48
+msgid "Proposals"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:59
+#: ././voteit/motion/templates/motion_process.pt:20
+msgid "Endorsements"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:69
+msgid "Other endorsements:"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:75
+msgid "You need to login to interact with this motion"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:86
+msgid "Endorse motion"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:92
+msgid "No longer endorse motion"
+msgstr ""
+
+#. Default: Note: You will not be able to make changes after the motion is
+#. submitted for review!
+#: ././voteit/motion/templates/motion.pt:103
+msgid "submit_for_review_warning"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:108
+msgid "Submit for review"
+msgstr ""
+
+#. Default: To share this motion with anonymous users, send them this link.
+#. It's also possible to share this link on social media and similar
+#: ././voteit/motion/templates/motion.pt:114
+msgid "share_link_explanation"
+msgstr ""
+
+#. Default: If you want to stop the link above from working you may do so.
+#: ././voteit/motion/templates/motion.pt:124
+msgid "disable_sharing_explanation"
+msgstr ""
+
+#. Default: Switch off sharing and disable link
+#. Default: Enable sharing
+#: ././voteit/motion/templates/motion.pt:130
+#: ././voteit/motion/templates/motion.pt:145
+msgid "switch_sharing_on_btn"
+msgstr ""
+
+#. Default: You may create a link where anonymous users can read this motion.
+#. If you wish to do so, click the link below. A link will be generated. Send
+#. that link to other users.
+#: ././voteit/motion/templates/motion.pt:138
+msgid "enable_sharing_explanation"
+msgstr ""
+
+#: ././voteit/motion/templates/motion_process.pt:17
+msgid "Author"
+msgstr ""
+
+#: ././voteit/motion/templates/motion_process.pt:18
+msgid "State"
+msgstr ""
+
+#: ././voteit/motion/templates/motion_process.pt:19
+msgid "Created"
+msgstr ""
+
+#: ././voteit/motion/templates/motion_process.pt:57
+msgid "Motion process is currently:"
+msgstr ""
+
+#: ././voteit/motion/templates/motion_process.pt:63
+msgid "To participate in the motion process, you need to be logged in!"
+msgstr ""
+
+#: ././voteit/motion/templates/motion_process.pt:73
+msgid "Add motion"
+msgstr ""

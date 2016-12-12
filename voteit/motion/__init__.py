@@ -12,3 +12,5 @@ def includeme(config):
     config.include('.workflows')
     #Static dir
     config.add_static_view('static_voteitmotion', 'static', cache_max_age=3600)
+    #Translations
+    config.add_translation_dirs('voteit.motion:locale/')
