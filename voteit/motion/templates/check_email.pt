@@ -17,9 +17,18 @@
 
 <div tal:condition="not request.profile.email_validated|None">
     <hr/>
-    <tal:ts i18n:translate="validate_email_address_msg">Your email address isn't validated.
-        Use the link in the user menu to do so. </tal:ts>
+    <p class="text-danger">
+    <span class="glyphicon glyphicon-warning-sign"></span>
+    <tal:ts i18n:translate="validate_email_address_msg">
+        Your email address isn't validated - you need to do that before checking against membership lists.
+    </tal:ts>
+    </p>
+    <p>
+        <a href="${request.resource_url(request.profile, 'validate_email', query={'came_from': request.resource_url(context)})}"
+            class="btn btn-success">
+            <span class="glyphicon glyphicon-envelope"></span>
+            <tal:ts i18n:translate="">Validate email</tal:ts>
+        </a>
+    </p>
 </div>
-
-
 </tal:main>
