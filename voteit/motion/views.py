@@ -130,9 +130,7 @@ class CheckAgainstHashlistView(BaseView):
         if not profile:
             raise HTTPForbidden(_("Must be logged in"))
         if not profile.email or not profile.email_validated:
-            raise HTTPForbidden(_("no_validated_email_error",
-                                  default="You need to have a validated email address to use this. "
-                                  "Validate your email on the profile page."))
+            raise HTTPForbidden(_("You need to have a validated email address to use this. "))
         came_from = self.request.GET.get('came_from', None)
         if came_from:
             response = HTTPFound(location=came_from)
@@ -145,7 +143,7 @@ class CheckAgainstHashlistView(BaseView):
                 self.context.local_roles.add(profile.userid, ROLE_MOTION_PROCESS_PARTICIPANT)
                 self.flash_messages.add(_("granted_access_message",
                                           default="You've been granted access to add motions "
-                                          "(if process is open) and to endorse motions"),
+                                          "(if process is open) and to endorse motions."),
                                         type="success", auto_destruct=False)
                 return response
         self.flash_messages.add(_("not_found_when_checked_against_hashlist",

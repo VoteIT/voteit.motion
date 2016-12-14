@@ -16,14 +16,17 @@ class MotionProcessSchema(colander.Schema):
         colander.String(),
         title=_("Description"),
         missing="",
-        description=_("motion_process_schema_description",
-                      default="Short description, visible as lead-in and on searches.")
+        description=_("schema_description",
+                      default="Short description, visible as lead-in and on searches."),
     )
     body = colander.SchemaNode(
         colander.String(),
         title=_("Text body"),
         missing="",
-        description=_("Describe the process etc..."),
+        description=_("schema_body_description",
+                      default="This is the description text for participants in the motion process. "
+                              "It's always a good idea to include some basic instructions "
+                              "and important dates as when the process opens and closes."),
         widget=deform.widget.RichTextWidget(),
     )
     hashlist_uids = colander.SchemaNode(
@@ -51,8 +54,8 @@ class MotionSchema(colander.Schema):
         colander.String(),
         title=_("Short description"),
         missing="",
-        description=_("motion_schema_description",
-                      default="Visible as lead-in and on searches. Keep it very short!")
+        description=_("schema_description",
+                      default="Short description, visible as lead-in and on searches."),
     )
     body = colander.SchemaNode(
         colander.String(),
@@ -69,7 +72,7 @@ class MotionSchema(colander.Schema):
             title=_("Proposal"),
             widget=deform.widget.TextAreaWidget(rows=3),
         ),
-        title=_("Proposals add at least one"),
+        title=_("Proposals - add at least one"),
         description=_("motion_proposals_schema_description",
                       default="Proposals must be written in a way so it's possible to approve or deny each one. "
                               "Don't give any background information or similar here."),
@@ -91,8 +94,9 @@ class EditEndorsementsSchema(colander.Schema):
     )
     endorsements_text = colander.SchemaNode(
         colander.String(),
-        title=_("Written endorsements"),
-        description=_("From non-users."),
+        title=_("Other endorsements"),
+        description=_("written_endorsements_description",
+                      default="From people who doesn't have an account here or perhaps from other groups."),
         missing="",
         widget=deform.widget.RichTextWidget(height=200),
     )

@@ -111,8 +111,10 @@
 
     <tal:sharing_on condition="context.sharing_token">
 
-        <p i18n:translate="share_link_explanation">To share this motion with anonymous users, send them this link.
-            It's also possible to share this link on social media and similar</p>
+        <p i18n:translate="share_link_explanation">
+            To share this motion with anonymous users, send them this link.
+            It's also possible to share this link on social media and similar.
+        </p>
 
         <code>
             ${request.resource_url(context, '_ts', context.sharing_token)}
@@ -127,7 +129,7 @@
             <p>
                 <a href="${request.resource_url(context, 'toggle_sharing', query={'s': 'off'})}"
                     class="text-danger"
-                    i18n:translate="switch_sharing_on_btn">
+                    i18n:translate="switch_sharing_off_btn">
                     Switch off sharing and disable link
                 </a>
             </p>
@@ -136,8 +138,8 @@
     <tal:sharing_off condition="can_enable_sharing and not context.sharing_token">
 
         <p i18n:translate="enable_sharing_explanation">
-            You may create a link where anonymous users can read this motion.
-            If you wish to do so, click the link below. A link will be generated. Send that link to other users.
+            If you enable sharing, a link will be created where anonymous users may read this motion.
+            It's also possible to share the created link on social media and similar.
         </p>
         <p>
             <a href="${request.resource_url(context, 'toggle_sharing', query={'s': 'on'})}"

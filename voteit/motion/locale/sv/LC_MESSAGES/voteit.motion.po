@@ -1,319 +1,359 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2016-12-14 19:22+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.6\n"
 
 #: voteit/motion/resources.py:26
 msgid "Motion process"
-msgstr ""
+msgstr "Motionsprocess"
 
 #: voteit/motion/resources.py:46
 msgid "Motion"
-msgstr ""
+msgstr "Motion"
 
-#: voteit/motion/schemas.py:14 voteit/motion/schemas.py:49
+#: voteit/motion/schemas.py:13 voteit/motion/schemas.py:51
 #: voteit/motion/templates/motion_process.pt:16
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
-#: voteit/motion/schemas.py:18
+#: voteit/motion/schemas.py:17
 msgid "Description"
-msgstr ""
+msgstr "Beskrivning"
 
 #. Default: Short description, visible as lead-in and on searches.
-#: voteit/motion/schemas.py:20
-msgid "motion_process_schema_description"
-msgstr ""
+#: voteit/motion/schemas.py:19 voteit/motion/schemas.py:57
+msgid "schema_description"
+msgstr "Kort beskrivning, synlig som ingress och i sökresultat."
 
-#: voteit/motion/schemas.py:25 voteit/motion/schemas.py:60
+#: voteit/motion/schemas.py:24 voteit/motion/schemas.py:62
 msgid "Text body"
-msgstr ""
+msgstr "Brödtext"
 
-#: voteit/motion/schemas.py:27
-msgid "Describe the process etc..."
+#. Default: This is the description text for participants in the motion
+#. process. It's always a good idea to include some basic instructions and
+#. important dates as when the process opens and closes.
+#: voteit/motion/schemas.py:26
+msgid "schema_body_description"
 msgstr ""
+"Beskrivningstext för deltagare i motionsprocessen. Det är alltid en bra ide "
+"att gå igenom lite grundläggande instruktioner och lista viktiga datum som "
+"när processen öppnar och stänger."
 
-#: voteit/motion/schemas.py:35
+#: voteit/motion/schemas.py:37
 msgid "Hashlists"
-msgstr ""
+msgstr "Hashlista"
 
 #. Default: Users in this hashlist may gain permission to participate
-#: voteit/motion/schemas.py:38
+#: voteit/motion/schemas.py:40
 msgid "hashlist_uids_schema_title"
-msgstr ""
+msgstr "Användare i denna hashlista kan få rättighet att delta"
 
 #. Default: Requires package arche_hashlist to work. Users will need to have
 #. their email address validated + pass a check against the hashlist.
-#: voteit/motion/schemas.py:40
+#: voteit/motion/schemas.py:42
 msgid "hashlist_uids_schema_description"
 msgstr ""
+"Kräver paketet arche_hashlist för att fungera. Användare måste ha sin "
+"epostadress validerad + genomgå en koll mot hashlistan."
 
-#: voteit/motion/schemas.py:53
-msgid "Short description"
-msgstr ""
-
-#. Default: Visible as lead-in and on searches. Keep it very short!
 #: voteit/motion/schemas.py:55
-msgid "motion_schema_description"
-msgstr ""
+msgid "Short description"
+msgstr "Kort beskrivning"
 
-#: voteit/motion/schemas.py:62
+#: voteit/motion/schemas.py:64
 msgid "Your motion text, excluding proposals"
-msgstr ""
+msgstr "Din motionstext, exklusive förslag"
 
-#: voteit/motion/schemas.py:70
+#: voteit/motion/schemas.py:72
 msgid "Proposal"
-msgstr ""
+msgstr "Förslag"
 
-#: voteit/motion/schemas.py:73
-msgid "Proposals add at least one"
-msgstr ""
+#: voteit/motion/schemas.py:75
+msgid "Proposals - add at least one"
+msgstr "Förslag - lägg till minst ett"
 
 #. Default: Proposals must be written in a way so it's possible to approve or
 #. deny each one. Don't give any background information or similar here.
-#: voteit/motion/schemas.py:74
+#: voteit/motion/schemas.py:76
 msgid "motion_proposals_schema_description"
 msgstr ""
+"Förslag måste skrivas så de går att bifalla eller avslå var för sig. Ge "
+"ingen bakgrundsinformation eller dylikt här."
 
-#: voteit/motion/schemas.py:105
+#: voteit/motion/schemas.py:91
 msgid "UserID"
-msgstr ""
+msgstr "AnvändarID"
 
-#: voteit/motion/schemas.py:111
-msgid "Written endorsements"
-msgstr ""
+#: voteit/motion/schemas.py:97
+msgid "Other endorsements"
+msgstr "Andra som stödjer"
 
-#: voteit/motion/schemas.py:112
-msgid "From non-users."
+#. Default: From people who doesn't have an account here or perhaps from other
+#. groups.
+#: voteit/motion/schemas.py:98
+msgid "written_endorsements_description"
 msgstr ""
+"Från människor som inte har ett konto här eller kanske från andra grupper."
 
 #: voteit/motion/security.py:9
 msgid "Participate motion proc."
-msgstr ""
+msgstr "Delta motionsproc."
 
 #. Default: Sharing enalbed - use the link below.
 #: voteit/motion/views.py:87
 msgid "sharing_switched_on"
-msgstr ""
+msgstr "Delning påslaget - använd länken som skapades nedan."
 
 #. Default: Sharing switched off - motion not accessible unless you're logged
 #. in.
 #: voteit/motion/views.py:92
 msgid "sharing_switched_off"
 msgstr ""
+"Delning avstängd - motionen är inte tillgänglig om du inte är inloggad."
 
 #. Default: You're now endorsing this motion.
 #: voteit/motion/views.py:107
 msgid "youre_now_endorsing"
-msgstr ""
+msgstr "Du stödjer nu denna motion."
 
 #. Default: You're no longer endorsing this motion.
 #: voteit/motion/views.py:114
 msgid "your_endorsement_removed"
-msgstr ""
+msgstr "Du stödjer inte längre motionen."
 
 #: voteit/motion/views.py:131
 msgid "Must be logged in"
-msgstr ""
+msgstr "Måste vara inloggad"
 
-#. Default: You need to have a validated email address to use this. Validate
-#. your email on the profile page.
 #: voteit/motion/views.py:133
-msgid "no_validated_email_error"
-msgstr ""
+msgid "You need to have a validated email address to use this. "
+msgstr "Du behöver ha en validerad epostadress för att använda detta."
 
 #. Default: You've been granted access to add motions (if process is open) and
-#. to endorse motions
-#: voteit/motion/views.py:146
+#. to endorse motions.
+#: voteit/motion/views.py:144
 msgid "granted_access_message"
 msgstr ""
+"Du har blivit tilldelad rättigheter för att lägga till motioner (om "
+"processen är öppen) för för att stödja motioner."
 
 #. Default: We couldn't find your email address. Please contact the
 #. organisation responsible for this process to gain access.
-#: voteit/motion/views.py:151
+#: voteit/motion/views.py:149
 msgid "not_found_when_checked_against_hashlist"
 msgstr ""
+"Vi hittade inte din epostadress i registret. Kontakta organisationen som är "
+"ansvarig för processen för att få access."
 
 #: voteit/motion/workflows.py:21
 msgid "Motion process workflow"
-msgstr ""
+msgstr "Arbetetsflöde för motionsprocess"
 
 #: voteit/motion/workflows.py:22
 msgid "Private"
-msgstr ""
+msgstr "Privat"
 
 #: voteit/motion/workflows.py:23
 msgid "Open"
-msgstr ""
+msgstr "Öppen"
 
 #: voteit/motion/workflows.py:24
 msgid "Closed"
-msgstr ""
+msgstr "Stängd"
 
 #: voteit/motion/workflows.py:45
 msgid "Make private"
-msgstr ""
+msgstr "Gör privat"
 
 #: voteit/motion/workflows.py:53
 msgid "Close process"
-msgstr ""
+msgstr "Stäng processen"
 
 #: voteit/motion/workflows.py:61
 msgid "Open process"
-msgstr ""
+msgstr "Öppna processen"
 
 #: voteit/motion/workflows.py:67
 msgid "Motion workflow"
-msgstr ""
+msgstr "Arbetsflöde för motion"
 
 #: voteit/motion/workflows.py:68
 msgid "Draft"
-msgstr ""
+msgstr "Utkast"
 
 #: voteit/motion/workflows.py:69
 msgid "Under review"
-msgstr ""
+msgstr "Granskas"
 
 #: voteit/motion/workflows.py:70
-msgid "Published"
-msgstr ""
+msgid "Awaiting endorsements"
+msgstr "Inväntar stöd"
 
-#: voteit/motion/workflows.py:71 voteit/motion/workflows.py:117
-msgid "Lacked endorsement"
-msgstr ""
+#: voteit/motion/workflows.py:71
+msgid "Lacked enough endorsements"
+msgstr "Saknade tillräckligt stöd"
 
-#: voteit/motion/workflows.py:72
-msgid "Has endorsement"
-msgstr ""
+#: voteit/motion/workflows.py:72 voteit/motion/workflows.py:125
+msgid "Has enough endorsements"
+msgstr "Har tillräckligt med stöd"
 
 #: voteit/motion/workflows.py:93
 msgid "Set as draft"
-msgstr ""
+msgstr "Sätt som utkast"
 
 #: voteit/motion/workflows.py:101
 msgid "Set as under review"
-msgstr ""
+msgstr "Till granskning"
 
 #: voteit/motion/workflows.py:109
-msgid "Publish"
-msgstr ""
+msgid "Set as awaiting endorsements"
+msgstr "Sätt som inväntar stöd"
 
-#: voteit/motion/workflows.py:125
-msgid "Has enough endorsements"
-msgstr ""
+#: voteit/motion/workflows.py:117
+msgid "Lacked endorsement"
+msgstr "Saknade stöd"
 
 #. Default: Check your permissions to participate in the motion process.
 #: voteit/motion/templates/check_email.pt:9
 msgid "check_credentials_explanation"
-msgstr ""
+msgstr "Kontrollera dina rättigheter att delta i motionsprocessen."
 
 #: voteit/motion/templates/check_email.pt:14
 msgid "Check"
+msgstr "Kontrollera"
+
+#. Default: Your email address isn't validated - you need to do that before
+#. checking against membership lists.
+#: voteit/motion/templates/check_email.pt:22
+msgid "validate_email_address_msg"
 msgstr ""
+"Din epostadress är inte validerad - du behöver göra det innan vi kan kolla "
+"av den mot medlemslistan."
+
+#: voteit/motion/templates/check_email.pt:30
+msgid "Validate email"
+msgstr "Validera epost"
 
 #: voteit/motion/templates/motion.pt:17
 msgid "Edit motion"
-msgstr ""
+msgstr "Redigera motion"
 
 #: voteit/motion/templates/motion.pt:25
 msgid "By:"
-msgstr ""
+msgstr "Av:"
 
 #: voteit/motion/templates/motion.pt:29
 msgid "Status:"
-msgstr ""
+msgstr "Status:"
 
 #: voteit/motion/templates/motion.pt:36
 msgid "Motion text"
-msgstr ""
+msgstr "Motionens brödtext"
 
 #: voteit/motion/templates/motion.pt:48
 msgid "Proposals"
-msgstr ""
+msgstr "Förslag"
 
 #: voteit/motion/templates/motion.pt:59
 #: voteit/motion/templates/motion_process.pt:20
 msgid "Endorsements"
-msgstr ""
+msgstr "Stöd"
 
 #: voteit/motion/templates/motion.pt:69
 msgid "Other endorsements:"
-msgstr ""
+msgstr "Andra som stödjer:"
 
 #: voteit/motion/templates/motion.pt:75
 msgid "You need to login to interact with this motion"
-msgstr ""
+msgstr "Du behöver vara inloggad för att göra något med motionen"
 
 #: voteit/motion/templates/motion.pt:86
 msgid "Endorse motion"
-msgstr ""
+msgstr "Stöd motionen"
 
 #: voteit/motion/templates/motion.pt:92
 msgid "No longer endorse motion"
-msgstr ""
+msgstr "Stöd inte motionen längre"
 
 #. Default: Note: You will not be able to make changes after the motion is
 #. submitted for review!
 #: voteit/motion/templates/motion.pt:103
 msgid "submit_for_review_warning"
 msgstr ""
+"Obs: Du kommer inte kunna göra ändringar efter att motionen är inskickad för "
+"granskning!"
 
 #: voteit/motion/templates/motion.pt:108
 msgid "Submit for review"
-msgstr ""
+msgstr "Skicka in för granskning"
 
 #. Default: To share this motion with anonymous users, send them this link.
-#. It's also possible to share this link on social media and similar
+#. It's also possible to share this link on social media and similar.
 #: voteit/motion/templates/motion.pt:114
 msgid "share_link_explanation"
 msgstr ""
+"För att dela motionen med anonyma användare, skicka denna länk till dem. Det "
+"är också möjligt att använda länken för att dela på sociala medier eller "
+"dylikt."
 
 #. Default: If you want to stop the link above from working you may do so.
-#: voteit/motion/templates/motion.pt:124
+#: voteit/motion/templates/motion.pt:126
 msgid "disable_sharing_explanation"
 msgstr ""
+"Om du vill ta bort länken ovan och stänga av delning så kan du göra det."
 
 #. Default: Switch off sharing and disable link
-#. Default: Enable sharing
-#: voteit/motion/templates/motion.pt:130 voteit/motion/templates/motion.pt:145
-msgid "switch_sharing_on_btn"
-msgstr ""
+#: voteit/motion/templates/motion.pt:132
+msgid "switch_sharing_off_btn"
+msgstr "Stäng av delning och inaktivera länken"
 
-#. Default: You may create a link where anonymous users can read this motion.
-#. If you wish to do so, click the link below. A link will be generated. Send
-#. that link to other users.
-#: voteit/motion/templates/motion.pt:138
+#. Default: If you enable sharing, a link will be created where anonymous users
+#. may read this motion. It's also possible to share the created link on social
+#. media and similar.
+#: voteit/motion/templates/motion.pt:140
 msgid "enable_sharing_explanation"
 msgstr ""
+"Om du slår på delning så kommer en länk skapas där anonyma användare kan "
+"läsa motionen. Det är också möjligt att dela den skapade länken på sociala "
+"medier och dylikt."
+
+#. Default: Enable sharing
+#: voteit/motion/templates/motion.pt:147
+msgid "switch_sharing_on_btn"
+msgstr "Slå på delning"
+
+#: voteit/motion/templates/motion.pt:158
+msgid "Back"
+msgstr "Tillbaka"
 
 #: voteit/motion/templates/motion_process.pt:17
 msgid "Author"
-msgstr ""
+msgstr "Upphovsman"
 
 #: voteit/motion/templates/motion_process.pt:18
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #: voteit/motion/templates/motion_process.pt:19
 msgid "Created"
-msgstr ""
+msgstr "Skapad"
 
 #: voteit/motion/templates/motion_process.pt:57
 msgid "Motion process is currently:"
-msgstr ""
+msgstr "Motionen är just nu:"
 
 #: voteit/motion/templates/motion_process.pt:63
 msgid "To participate in the motion process, you need to be logged in!"
-msgstr ""
+msgstr "Du behöver vara inloggad för att delta i motionsprocessen!"
 
 #: voteit/motion/templates/motion_process.pt:73
 msgid "Add motion"
-msgstr "L�gg till motion"
+msgstr "Lägg till motion"
