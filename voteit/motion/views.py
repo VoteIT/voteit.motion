@@ -164,7 +164,7 @@ def render_check_email_snippet(context, request):
     if request.profile is None:
         return ''
     already_has_role = ROLE_MOTION_PROCESS_PARTICIPANT in mp.local_roles.get(request.authenticated_userid, ())
-    if context.sharing_token:
+    if getattr(context, 'sharing_token', None):
         came_from = request.resource_url(context, '_ts', context.sharing_token)
     else:
         came_from = request.resource_url(context)
