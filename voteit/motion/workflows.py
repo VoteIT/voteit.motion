@@ -87,40 +87,40 @@ class MotionWorkflow(Workflow):
 
 
 MotionWorkflow.add_transitions(
-    from_states='*',
-    to_states='draft',
+    from_states='draft',
+    to_states=['review', 'awaiting_endorsement'],
     permission=security.CHANGE_WORKFLOW_STATE,
     title=_("Set as draft"),
 )
 
 
 MotionWorkflow.add_transitions(
-    from_states='*',
-    to_states='review',
+    from_states='review',
+    to_states='*',
     permission=security.CHANGE_WORKFLOW_STATE,
     title=_("Set as under review"),
 )
 
 
 MotionWorkflow.add_transitions(
-    from_states='*',
-    to_states='awaiting_endorsement',
+    from_states='awaiting_endorsement',
+    to_states='*',
     permission=security.CHANGE_WORKFLOW_STATE,
     title=_("Set as awaiting endorsements"),
 )
 
 
 MotionWorkflow.add_transitions(
-    from_states='*',
-    to_states='lacked_endorsement',
+    from_states='lacked_endorsement',
+    to_states='awaiting_endorsement',
     permission=security.CHANGE_WORKFLOW_STATE,
     title=_("Lacked endorsement"),
 )
 
 
 MotionWorkflow.add_transitions(
-    from_states='*',
-    to_states='endorsed',
+    from_states='endorsed',
+    to_states='awaiting_endorsement',
     permission=security.CHANGE_WORKFLOW_STATE,
     title=_("Has enough endorsements"),
 )
