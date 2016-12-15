@@ -8,6 +8,14 @@
 <body>
 <tal:main metal:fill-slot="main-content">
 
+    <h1 class="page-header">${context.title}</h1>
+
+    <p tal:condition="context.description" class="lead">${context.description}</p>
+
+    <div class="body">
+        ${structure: context.body}
+    </div><br/>
+
     <table tal:define="motions view.get_motions()"
            tal:condition="motions"
            class="table table-responsive table-bordered table-striped table-hover sortable-table">
