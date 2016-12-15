@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-12-14 19:22+0100\n"
+"POT-Creation-Date: 2016-12-15 15:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgid "Motion"
 msgstr "Motion"
 
 #: voteit/motion/schemas.py:13 voteit/motion/schemas.py:51
-#: voteit/motion/templates/motion_process.pt:16
+#: voteit/motion/templates/motion_process.pt:24
 msgid "Title"
 msgstr "Titel"
 
@@ -201,25 +201,9 @@ msgstr "Inväntar stöd"
 msgid "Lacked enough endorsements"
 msgstr "Saknade tillräckligt stöd"
 
-#: voteit/motion/workflows.py:72 voteit/motion/workflows.py:125
+#: voteit/motion/workflows.py:72
 msgid "Has enough endorsements"
 msgstr "Har tillräckligt med stöd"
-
-#: voteit/motion/workflows.py:93
-msgid "Set as draft"
-msgstr "Sätt som utkast"
-
-#: voteit/motion/workflows.py:101
-msgid "Set as under review"
-msgstr "Till granskning"
-
-#: voteit/motion/workflows.py:109
-msgid "Set as awaiting endorsements"
-msgstr "Sätt som inväntar stöd"
-
-#: voteit/motion/workflows.py:117
-msgid "Lacked endorsement"
-msgstr "Saknade stöd"
 
 #. Default: Check your permissions to participate in the motion process.
 #: voteit/motion/templates/check_email.pt:9
@@ -263,7 +247,7 @@ msgid "Proposals"
 msgstr "Förslag"
 
 #: voteit/motion/templates/motion.pt:59
-#: voteit/motion/templates/motion_process.pt:20
+#: voteit/motion/templates/motion_process.pt:28
 msgid "Endorsements"
 msgstr "Stöd"
 
@@ -334,26 +318,38 @@ msgstr "Slå på delning"
 msgid "Back"
 msgstr "Tillbaka"
 
-#: voteit/motion/templates/motion_process.pt:17
+#: voteit/motion/templates/motion_process.pt:25
 msgid "Author"
 msgstr "Upphovsman"
 
-#: voteit/motion/templates/motion_process.pt:18
+#: voteit/motion/templates/motion_process.pt:26
 msgid "State"
 msgstr "Status"
 
-#: voteit/motion/templates/motion_process.pt:19
+#: voteit/motion/templates/motion_process.pt:27
 msgid "Created"
 msgstr "Skapad"
 
-#: voteit/motion/templates/motion_process.pt:57
+#: voteit/motion/templates/motion_process.pt:65
 msgid "Motion process is currently:"
-msgstr "Motionen är just nu:"
+msgstr "Motionsprocessen är:"
 
-#: voteit/motion/templates/motion_process.pt:63
+#: voteit/motion/templates/motion_process.pt:71
 msgid "To participate in the motion process, you need to be logged in!"
 msgstr "Du behöver vara inloggad för att delta i motionsprocessen!"
 
-#: voteit/motion/templates/motion_process.pt:73
+#: voteit/motion/templates/motion_process.pt:81
 msgid "Add motion"
 msgstr "Lägg till motion"
+
+#~ msgid "Set as draft"
+#~ msgstr "Sätt som utkast"
+
+#~ msgid "Set as under review"
+#~ msgstr "Till granskning"
+
+#~ msgid "Set as awaiting endorsements"
+#~ msgstr "Sätt som inväntar stöd"
+
+#~ msgid "Lacked endorsement"
+#~ msgstr "Saknade stöd"

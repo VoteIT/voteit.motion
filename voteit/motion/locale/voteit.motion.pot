@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2016-12-14 19:22+0100\n"
+"POT-Creation-Date: 2016-12-15 15:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgid "Motion"
 msgstr ""
 
 #: ././voteit/motion/schemas.py:13 ././voteit/motion/schemas.py:51
-#: ././voteit/motion/templates/motion_process.pt:16
+#: ././voteit/motion/templates/motion_process.pt:24
 msgid "Title"
 msgstr ""
 
@@ -193,24 +193,8 @@ msgstr ""
 msgid "Lacked enough endorsements"
 msgstr ""
 
-#: ././voteit/motion/workflows.py:72 ././voteit/motion/workflows.py:125
+#: ././voteit/motion/workflows.py:72
 msgid "Has enough endorsements"
-msgstr ""
-
-#: ././voteit/motion/workflows.py:93
-msgid "Set as draft"
-msgstr ""
-
-#: ././voteit/motion/workflows.py:101
-msgid "Set as under review"
-msgstr ""
-
-#: ././voteit/motion/workflows.py:109
-msgid "Set as awaiting endorsements"
-msgstr ""
-
-#: ././voteit/motion/workflows.py:117
-msgid "Lacked endorsement"
 msgstr ""
 
 #. Default: Check your permissions to participate in the motion process.
@@ -253,7 +237,7 @@ msgid "Proposals"
 msgstr ""
 
 #: ././voteit/motion/templates/motion.pt:59
-#: ././voteit/motion/templates/motion_process.pt:20
+#: ././voteit/motion/templates/motion_process.pt:28
 msgid "Endorsements"
 msgstr ""
 
@@ -315,26 +299,26 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: ././voteit/motion/templates/motion_process.pt:17
+#: ././voteit/motion/templates/motion_process.pt:25
 msgid "Author"
 msgstr ""
 
-#: ././voteit/motion/templates/motion_process.pt:18
+#: ././voteit/motion/templates/motion_process.pt:26
 msgid "State"
 msgstr ""
 
-#: ././voteit/motion/templates/motion_process.pt:19
+#: ././voteit/motion/templates/motion_process.pt:27
 msgid "Created"
 msgstr ""
 
-#: ././voteit/motion/templates/motion_process.pt:57
+#: ././voteit/motion/templates/motion_process.pt:65
 msgid "Motion process is currently:"
 msgstr ""
 
-#: ././voteit/motion/templates/motion_process.pt:63
+#: ././voteit/motion/templates/motion_process.pt:71
 msgid "To participate in the motion process, you need to be logged in!"
 msgstr ""
 
-#: ././voteit/motion/templates/motion_process.pt:73
+#: ././voteit/motion/templates/motion_process.pt:81
 msgid "Add motion"
 msgstr ""
