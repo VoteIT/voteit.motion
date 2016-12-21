@@ -31,6 +31,9 @@
         <tbody>
             <tr tal:repeat="obj motions">
                 <td>
+                    <a tal:condition="request.has_permission('perm:Edit', obj)"
+                       href="${request.resource_url(obj, 'edit', query={'came_from': request.resource_url(context)})}"
+                    ><span class="glyphicon glyphicon-edit"></span></a>
                     <a href="${request.resource_url(obj)}">
                     ${obj.title}
                     </a>
