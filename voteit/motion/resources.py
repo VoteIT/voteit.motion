@@ -21,7 +21,7 @@ from voteit.motion.permissions import ADD_MOTION_PROCESS
 @implementer(IMotionProcess)
 class MotionProcess(Content, ContextACLMixin, LocalRolesMixin):
     default_view = "view"
-    nav_visible = True
+    nav_visible = False
     type_name = "MotionProcess"
     type_title = _("Motion process")
     add_permission = ADD_MOTION_PROCESS
