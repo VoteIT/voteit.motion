@@ -9,6 +9,7 @@ from arche.api import ContextACLMixin
 from arche.api import LocalRolesMixin
 from arche.utils import utcnow
 from persistent.list import PersistentList
+from voteit.core.security import ROLE_VIEWER
 from zope.interface import implementer
 
 from voteit.motion import _
@@ -81,10 +82,12 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
             self._endorsements = OOBTree()
         #Add new with timestamp
         for userid in set(value) - set(self._endorsements):
+            self.local_roles.add(userid, ROLE_VIEWER)
             self._endorsements[userid] = utcnow()
         #Remove no longer endorsing userids
         for userid in set(self._endorsements) - set(value):
             del self._endorsements[userid]
+            self.local_roles.remove(userid, ROLE_VIEWER)
 
     @property
     def endorsements_info(self):

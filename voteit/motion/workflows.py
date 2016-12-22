@@ -80,6 +80,7 @@ class MotionWorkflow(Workflow):
             acl_entry.add(security.ROLE_ADMIN, ADMIN_PERMS)
             acl_entry.add(ROLE_EDITOR, EDITOR_PERMS)
             acl_entry.add(security.ROLE_OWNER, [security.VIEW, ENABLE_MOTION_SHARING])
+            acl_entry.add(security.ROLE_VIEWER, [security.VIEW])
             if sname != 'lacked_endorsement':
                 acl_entry.add(ROLE_MOTION_PROCESS_PARTICIPANT, [ENDORSE_MOTION])
         registry.acl[cls.name+':draft'].add(security.ROLE_OWNER,
