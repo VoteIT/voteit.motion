@@ -7,8 +7,10 @@ from BTrees.OOBTree import OOBTree
 from arche.api import Content
 from arche.api import ContextACLMixin
 from arche.api import LocalRolesMixin
+from arche.security import ROLE_EVERYONE
 from arche.utils import utcnow
 from persistent.list import PersistentList
+from pyramid.security import Deny
 from voteit.core.security import ROLE_VIEWER
 from zope.interface import implementer
 
@@ -17,6 +19,7 @@ from voteit.motion.intefaces import IMotionProcess
 from voteit.motion.intefaces import IMotion
 from voteit.motion.permissions import ADD_MOTION
 from voteit.motion.permissions import ADD_MOTION_PROCESS
+from voteit.motion.permissions import ENDORSE_MOTION
 
 
 @implementer(IMotionProcess)
@@ -28,6 +31,7 @@ class MotionProcess(Content, ContextACLMixin, LocalRolesMixin):
     add_permission = ADD_MOTION_PROCESS
     css_icon = "glyphicon glyphicon-inbox"
     body = ""
+    allow_endorsements = False
     _hashlist_uids = ()
 
     @property
@@ -53,6 +57,13 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
     _proposals = ()
     _creator = ()
     _endorsements = {}
+
+    @property
+    def __acl__(self):
+        acl_list = super(Motion, self).__acl__
+        if self.__parent__ and self.__parent__.allow_endorsements == False:
+            acl_list.insert(0, (Deny, ROLE_EVERYONE, (ENDORSE_MOTION,)))
+        return acl_list
 
     @property
     def proposals(self):

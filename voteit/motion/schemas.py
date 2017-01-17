@@ -29,6 +29,10 @@ class MotionProcessSchema(colander.Schema):
                               "and important dates as when the process opens and closes."),
         widget=deform.widget.RichTextWidget(),
     )
+    allow_endorsements = colander.SchemaNode(
+        colander.Bool(),
+        title=_("Allow endorsements"),
+    )
     hashlist_uids = colander.SchemaNode(
         colander.Sequence(),
         colander.SchemaNode(
