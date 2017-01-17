@@ -13,7 +13,7 @@ EDITOR_PERMS = [
     security.VIEW,
     security.DELETE,
     ADD_MOTION,
-    ENABLE_MOTION_SHARING,
+    ENABLE_MOTION_SHARING, #May be blocked
 ]
 
 

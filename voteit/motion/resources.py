@@ -8,8 +8,12 @@ from arche.api import Content
 from arche.api import ContextACLMixin
 from arche.api import LocalRolesMixin
 from arche.security import ROLE_EVERYONE
+from arche.security import ROLE_AUTHENTICATED
+from arche.security import ROLE_OWNER
+from arche.security import PERM_VIEW
 from arche.utils import utcnow
 from persistent.list import PersistentList
+from pyramid.security import Allow
 from pyramid.security import Deny
 from voteit.core.security import ROLE_VIEWER
 from zope.interface import implementer
@@ -20,6 +24,7 @@ from voteit.motion.intefaces import IMotion
 from voteit.motion.permissions import ADD_MOTION
 from voteit.motion.permissions import ADD_MOTION_PROCESS
 from voteit.motion.permissions import ENDORSE_MOTION
+from voteit.motion.permissions import ENABLE_MOTION_SHARING
 
 
 @implementer(IMotionProcess)
@@ -32,6 +37,8 @@ class MotionProcess(Content, ContextACLMixin, LocalRolesMixin):
     css_icon = "glyphicon glyphicon-inbox"
     body = ""
     allow_endorsements = False
+    allow_sharing_link = False
+    motion_visibility = 'hidden'
     _hashlist_uids = ()
 
     @property
@@ -61,8 +68,21 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
     @property
     def __acl__(self):
         acl_list = super(Motion, self).__acl__
-        if self.__parent__ and self.__parent__.allow_endorsements == False:
-            acl_list.insert(0, (Deny, ROLE_EVERYONE, (ENDORSE_MOTION,)))
+        motion_proc = self.__parent__
+        if motion_proc:
+            if motion_proc.allow_endorsements == False:
+                acl_list.insert(0, (Deny, ROLE_EVERYONE, (ENDORSE_MOTION,)))
+            if motion_proc.allow_sharing_link == True:
+                acl_list.insert(0, (Allow, ROLE_OWNER, (ENABLE_MOTION_SHARING,)))
+            wf = self.workflow
+            state = ''
+            if wf:
+                state = wf.state in wf.states and wf.state or wf.initial_state
+            if state and state != 'draft':
+                if motion_proc.motion_visibility == 'authenticated':
+                    acl_list.insert(0, (Allow, ROLE_AUTHENTICATED, (PERM_VIEW,)))
+                if motion_proc.motion_visibility == 'everyone':
+                    acl_list.insert(0, (Allow, ROLE_EVERYONE, (PERM_VIEW,)))
         return acl_list
 
     @property

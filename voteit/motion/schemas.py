@@ -33,6 +33,26 @@ class MotionProcessSchema(colander.Schema):
         colander.Bool(),
         title=_("Allow endorsements"),
     )
+    allow_sharing_link = colander.SchemaNode(
+        colander.Bool(),
+        title=_("Allow users to create sharing link"),
+        description=_("allow_sharing_link_schema_description",
+                      default="If the motions are private, "
+                              "allow users to create sharing links to "
+                              "publish their motions to anyone.")
+    )
+    motion_visibility = colander.SchemaNode(
+        colander.String(),
+        title=_("Motion visibility"),
+        widget=deform.widget.SelectWidget(
+            values=(
+                ('', _("<Select>")),
+                ('hidden', _("All hidden (unless sharing links are used)")),
+                ('authenticated', _("Logged in can read all non-drafts")),
+                ('everyone', _("Visible to everyone")),
+            )
+        )
+    )
     hashlist_uids = colander.SchemaNode(
         colander.Sequence(),
         colander.SchemaNode(

@@ -96,9 +96,9 @@
 
     </div>
 
-    <hr/>
-
     <div tal:condition="can_submit">
+        <hr/>
+
         <p>
             <strong i18n:translate="submit_for_review_warning">Note: You will not be able to make changes after the motion is submitted for review!</strong>
         </p>
@@ -110,6 +110,7 @@
     </div>
 
     <tal:sharing_on condition="context.sharing_token">
+        <hr/>
 
         <p i18n:translate="share_link_explanation">
             To share this motion with anonymous users, send them this link.
@@ -136,6 +137,7 @@
         </tal:controls>
     </tal:sharing_on>
     <tal:sharing_off condition="can_enable_sharing and not context.sharing_token">
+        <hr/>
 
         <p i18n:translate="enable_sharing_explanation">
             If you enable sharing, a link will be created where anonymous users may read this motion.
