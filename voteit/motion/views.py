@@ -10,6 +10,7 @@ from pyramid.view import view_config
 from pyramid.view import view_defaults
 from voteit.core.security import CHANGE_WORKFLOW_STATE
 from voteit.core.security import EDIT
+from voteit.core.security import DELETE
 from voteit.core.security import VIEW
 from webhelpers.html.converters import nl2br
 from webhelpers.html.render import sanitize
@@ -18,7 +19,8 @@ from webhelpers.html.tools import auto_link
 from voteit.motion import _
 from voteit.motion.intefaces import IMotion
 from voteit.motion.intefaces import IMotionProcess
-from voteit.motion.permissions import ADD_MOTION, ENDORSE_MOTION
+from voteit.motion.permissions import ADD_MOTION
+from voteit.motion.permissions import ENDORSE_MOTION
 from voteit.motion.permissions import CHECK_EMAIL_AGAINST_HASHLIST
 from voteit.motion.permissions import ENABLE_MOTION_SHARING
 from voteit.motion.security import ROLE_MOTION_PROCESS_PARTICIPANT
@@ -60,6 +62,7 @@ class MotionView(BaseView):
         can_submit = self.context.wf_state == 'draft' and \
                      self.request.has_permission(CHANGE_WORKFLOW_STATE, self.context)
         return {'can_submit': can_submit,
+                'can_delete': self.request.has_permission(DELETE, self.context),
                 'can_edit': self.request.has_permission(EDIT, self.context),
                 'can_endorse': self.request.authenticated_userid not in self.context.creator and
                                self.request.has_permission(ENDORSE_MOTION, self.context),

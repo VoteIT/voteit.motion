@@ -84,7 +84,9 @@ class MotionWorkflow(Workflow):
             if sname != 'lacked_endorsement':
                 acl_entry.add(ROLE_MOTION_PROCESS_PARTICIPANT, [ENDORSE_MOTION])
         registry.acl[cls.name+':draft'].add(security.ROLE_OWNER,
-                                            [security.EDIT, security.CHANGE_WORKFLOW_STATE])
+                                            [security.EDIT,
+                                             security.CHANGE_WORKFLOW_STATE,
+                                             security.DELETE])
 
 
 MotionWorkflow.add_transitions(

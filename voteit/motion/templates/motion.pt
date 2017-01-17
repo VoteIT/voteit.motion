@@ -96,17 +96,43 @@
 
     </div>
 
-    <div tal:condition="can_submit">
-        <hr/>
+    <div class="row" tal:condition="can_submit or can_delete">
+        <div class="col-sm-12"><hr/></div>
+        <div class="col-sm-6" tal:condition="can_submit">
+            <p>
+                <strong i18n:translate="submit_for_review_warning">
+                    Note: You will not be able to make changes after the
+                    motion is submitted for review!
+                </strong>
+            </p>
+            <p>
+            <a href="${request.resource_url(context, '__wf_transition__', query = {'id': 'review', 'return_url': request.url})}"
+               class="btn btn-warning"
+               i18n:translate="">Submit for review</a>
+            </p>
+        </div>
+        <div class="col-sm-6" tal:condition="can_delete">
 
-        <p>
-            <strong i18n:translate="submit_for_review_warning">Note: You will not be able to make changes after the motion is submitted for review!</strong>
-        </p>
-        <p>
-        <a href="${request.resource_url(context, '__wf_transition__', query = {'id': 'review', 'return_url': request.url})}"
-           class="btn btn-warning"
-           i18n:translate="">Submit for review</a>
-        </p>
+            <div class="text-right">
+                <a class="btn btn-danger btn-xs" role="button"
+                   data-toggle="collapse" href="#danger-collapse"
+                   aria-expanded="false" aria-controls="danger-collapse">
+                    <span i18n:translate="">The danger zone</span>
+                </a>
+            </div>
+
+            <div class="collapse" id="danger-collapse">
+              <div class="well">
+                <p i18n:translate="changed_your_mind_delete">If you've changed your mind and don't want to hand in this motion:
+                </p>
+                <p>
+                <a href="${request.resource_url(context, 'delete')}"
+                   class="text-danger"
+                   i18n:translate="">Delete motion permanently</a>
+                </p>
+              </div>
+            </div>
+        </div>
     </div>
 
     <tal:sharing_on condition="context.sharing_token">
