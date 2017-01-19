@@ -98,7 +98,8 @@
 
     <div class="row" tal:condition="can_submit or can_delete">
         <div class="col-sm-12"><hr/></div>
-        <div class="col-sm-6" tal:condition="can_submit">
+        <div class="col-sm-6">
+            <tal:submit condition="can_submit">
             <p>
                 <strong i18n:translate="submit_for_review_warning">
                     Note: You will not be able to make changes after the
@@ -110,6 +111,7 @@
                class="btn btn-warning"
                i18n:translate="">Submit for review</a>
             </p>
+            </tal:submit>
         </div>
         <div class="col-sm-6" tal:condition="can_delete">
 
@@ -117,7 +119,7 @@
                 <a class="btn btn-danger btn-xs" role="button"
                    data-toggle="collapse" href="#danger-collapse"
                    aria-expanded="false" aria-controls="danger-collapse">
-                    <span i18n:translate="">The danger zone</span>
+                    <span i18n:translate="">Delete motion...</span>
                 </a>
             </div>
 
