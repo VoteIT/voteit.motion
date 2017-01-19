@@ -158,7 +158,7 @@ class ExportMotionsSchema(colander.Schema):
     description = _("Export motions into a meeting. Each motion will be it's own agenda item.")
     meeting = colander.SchemaNode(
         colander.String(),
-        title=_("Export to meeting"),
+        title=_("Export into meeting"),
         widget=meetings_select_widget,
         validator=meetings_validator,
         description=_("export_meeting_schema_desc",
@@ -166,7 +166,7 @@ class ExportMotionsSchema(colander.Schema):
     )
     as_userid = colander.SchemaNode(
         colander.String(),
-        title=_("Change all proposals to this user"),
+        title=_("Add all proposals as this user"),
         description=_("as_userid_schema_description",
                       default="If you want to override the default behaviour to "
                       "add proposals as the person who wrote them. "
