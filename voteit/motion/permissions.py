@@ -18,7 +18,8 @@ EDITOR_PERMS = [
 
 
 ADMIN_PERMS = [
-    security.PERM_MANAGE_USERS
+    security.PERM_MANAGE_USERS,
+    security.MANAGE_SERVER
 ]
 
 

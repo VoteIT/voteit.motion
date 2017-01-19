@@ -77,13 +77,21 @@
 
     <p tal:condition="check_email_snippet" tal:content="structure check_email_snippet">Check email btn</p>
 
-    <tal:add_motion condition="can_add_motion">
-        <a href="${request.resource_url(context, 'add', query={'content_type': 'Motion'})}"
+    <p>
+        <a tal:condition="can_add_motion"
+           href="${request.resource_url(context, 'add', query={'content_type': 'Motion'})}"
             class="btn btn-success">
             <span class="glyphicon glyphicon-list-alt"></span>
             <tal:ts i18n:translate="">Add motion</tal:ts>
         </a>
-    </tal:add_motion>
+
+        <a tal:condition="can_manage"
+           href="${request.resource_url(context, 'export_motions')}"
+           class="btn btn-default">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <tal:ts i18n:translate="">Export into meeting</tal:ts>
+        </a>
+    </p>
 
 </tal:main>
 </body>

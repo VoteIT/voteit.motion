@@ -1,17 +1,23 @@
+from arche.utils import generate_slug
+from arche.views.base import BaseForm
 from arche.views.base import BaseView
 from arche.views.base import DefaultEditForm
+from deform import Button
 from pyramid.httpexceptions import HTTPForbidden
 from pyramid.httpexceptions import HTTPFound
 from pyramid.httpexceptions import HTTPNotFound
 from pyramid.renderers import render
 from pyramid.security import NO_PERMISSION_REQUIRED
-from pyramid.traversal import find_interface
+from pyramid.traversal import find_interface, resource_path
 from pyramid.view import view_config
 from pyramid.view import view_defaults
+from repoze.catalog.query import Eq
 from voteit.core.security import CHANGE_WORKFLOW_STATE
 from voteit.core.security import EDIT
 from voteit.core.security import DELETE
 from voteit.core.security import VIEW
+from voteit.core.security import MANAGE_SERVER
+from voteit.motion.utils import export_into_meeting
 from webhelpers.html.converters import nl2br
 from webhelpers.html.render import sanitize
 from webhelpers.html.tools import auto_link
@@ -34,6 +40,7 @@ class MotionProcessView(BaseView):
 
     def __call__(self):
         return {'can_add_motion':  self.request.has_permission(ADD_MOTION, self.context),
+                'can_manage': self.request.has_permission(MANAGE_SERVER, self.context),
                 'check_email_snippet': render_check_email_snippet(self.context, self.request)}
 
     def get_motions(self):
@@ -42,6 +49,33 @@ class MotionProcessView(BaseView):
             if IMotion.providedBy(obj) and self.request.has_permission(VIEW, obj):
                 res.append(obj)
         return res
+
+
+@view_config(context=IMotionProcess,
+             name='export_motions',
+             permission=MANAGE_SERVER,
+             renderer='arche:templates/form.pt')
+class ExportMotionsForm(BaseForm):
+    schema_name = 'export_motions'
+    type_name = 'MotionProcess'
+
+    @property
+    def buttons(self):
+        return (
+            Button('export', title=_("Export")),
+            self.button_cancel,
+        )
+
+    def export_success(self, appstruct):
+        meeting = self.root[appstruct['meeting']]
+        as_userid = appstruct['as_userid']
+        view_perm = appstruct['view_perm']
+        results = export_into_meeting(self.request, self.context, meeting, as_userid=as_userid, view_perm=view_perm)
+        msg = _("export_success_message",
+                default="Created ${ai} agenda items and ${prop} proposals within this meeting.",
+                mapping=results)
+        self.flash_messages.add(msg)
+        return HTTPFound(location=self.request.resource_url(meeting))
 
 
 @view_config(context=IMotion,

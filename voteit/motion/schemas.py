@@ -2,7 +2,9 @@ from __future__ import unicode_literals
 
 import colander
 import deform
-from arche.widgets import deferred_autocompleting_userid_widget, ReferenceWidget
+from arche.widgets import deferred_autocompleting_userid_widget
+from arche.widgets import ReferenceWidget
+from voteit.core.security import MODERATE_MEETING
 
 from voteit.motion import _
 
@@ -126,7 +128,67 @@ class EditEndorsementsSchema(colander.Schema):
     )
 
 
+def _get_meetings(request):
+    docids = request.root.catalog.query("type_name == 'Meeting'", sort_index='sortable_title')[1]
+    values = []
+    for meeting in request.resolve_docids(docids):
+        if request.has_permission(MODERATE_MEETING, meeting):
+            values.append(meeting)
+    return values
+
+
+@colander.deferred
+def meetings_select_widget(node, kw):
+    request = kw['request']
+    meetings = _get_meetings(request)
+    values = [('', _("<Select>"))]
+    for meeting in meetings:
+        values.append((meeting.__name__, "%s (%s)" % (meeting.title, meeting.__name__)))
+    return deform.widget.SelectWidget(values=values)
+
+
+@colander.deferred
+def meetings_validator(node, kw):
+    request = kw['request']
+    values = [x.__name__ for x in _get_meetings(request)]
+    return colander.OneOf(values)
+
+
+class ExportMotionsSchema(colander.Schema):
+    description = _("Export motions into a meeting. Each motion will be it's own agenda item.")
+    meeting = colander.SchemaNode(
+        colander.String(),
+        title=_("Export to meeting"),
+        widget=meetings_select_widget,
+        validator=meetings_validator,
+        description=_("export_meeting_schema_desc",
+                      default="You must be moderator in the meeting you wish to export to.")
+    )
+    as_userid = colander.SchemaNode(
+        colander.String(),
+        title=_("Change all proposals to this user"),
+        description=_("as_userid_schema_description",
+                      default="If you want to override the default behaviour to "
+                      "add proposals as the person who wrote them. "
+                      "Not recommended unless you have a good reason to do so!"),
+        missing="",
+        widget=deferred_autocompleting_userid_widget,
+    )
+    view_perm = colander.SchemaNode(
+        colander.Bool(),
+        title=_("view_perm_schema_title",
+                default="Give included users view permission "
+                "within the meeting"),
+        description=_("view_perm_schema_description",
+                      default="If you're adding proposals as a specific user, "
+                      "the original creators will get the view permission from this setting."),
+        default=True,
+    )
+
+
 def includeme(config):
     config.add_schema('MotionProcess', MotionProcessSchema, ['add', 'edit'])
     config.add_schema('Motion', MotionSchema, ('add', 'edit'))
     config.add_schema('Motion', EditEndorsementsSchema, 'endorsements')
+    config.add_schema('MotionProcess', ExportMotionsSchema, 'export_motions')
+
