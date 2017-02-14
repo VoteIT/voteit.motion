@@ -2,8 +2,11 @@ from __future__ import unicode_literals
 
 import colander
 import deform
+from arche.models.workflow import get_workflows
 from arche.widgets import deferred_autocompleting_userid_widget
 from arche.widgets import ReferenceWidget
+from pyramid.traversal import resource_path
+from repoze.catalog.query import Eq
 from voteit.core.security import MODERATE_MEETING
 
 from voteit.motion import _
@@ -154,6 +157,21 @@ def meetings_validator(node, kw):
     return colander.OneOf(values)
 
 
+@colander.deferred
+def motion_states_checkbox_widget(node, kw):
+    request = kw['request']
+    context = kw['context']
+    wfs = get_workflows(request.registry)
+    motion_workflow = wfs['motion_workflow']
+    values = []
+    query = Eq('path', resource_path(context)) & Eq('type_name', 'Motion')
+    for (state, title) in motion_workflow.states.items():
+        title = request.localizer.translate(title)
+        title += " (%s)" % request.root.catalog.query(query & Eq('wf_state', state))[0].total
+        values.append((state, title))
+    return deform.widget.CheckboxChoiceWidget(values=values)
+
+
 class ExportMotionsSchema(colander.Schema):
     description = _("Export motions into a meeting. Each motion will be it's own agenda item.")
     meeting = colander.SchemaNode(
@@ -183,6 +201,12 @@ class ExportMotionsSchema(colander.Schema):
                       default="If you're adding proposals as a specific user, "
                       "the original creators will get the view permission from this setting."),
         default=True,
+    )
+    states_to_include = colander.SchemaNode(
+        colander.Set(),
+        title = _("Include these states in the export"),
+        default = ('endorsed',),
+        widget = motion_states_checkbox_widget,
     )
 
 

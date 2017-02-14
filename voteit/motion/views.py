@@ -70,7 +70,11 @@ class ExportMotionsForm(BaseForm):
         meeting = self.root[appstruct['meeting']]
         as_userid = appstruct['as_userid']
         view_perm = appstruct['view_perm']
-        results = export_into_meeting(self.request, self.context, meeting, as_userid=as_userid, view_perm=view_perm)
+        states = appstruct['states_to_include']
+        results = export_into_meeting(self.request, self.context, meeting,
+                                      as_userid=as_userid,
+                                      view_perm=view_perm,
+                                      states=states)
         msg = _("export_success_message",
                 default="Created ${ai} agenda items and ${prop} proposals within this meeting.",
                 mapping=results)

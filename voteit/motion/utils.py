@@ -1,21 +1,25 @@
 from arche.utils import generate_slug
 from pyramid.traversal import resource_path
+from repoze.catalog.query import Any
 from repoze.catalog.query import Eq
 from voteit.core.security import ROLE_VIEWER
 
 
-def _get_motions(request, context):
+def _get_motions(request, context, states):
     query = Eq('type_name', 'Motion') & \
-            Eq('wf_state', 'endorsed') & \
+            Any('wf_state', states) & \
             Eq('path', resource_path(context))
     docids = request.root.catalog.query(query, sort_index='created')[1]
     return request.resolve_docids(docids, perm=None)
 
 
-def export_into_meeting(request, motion_process, meeting, as_userid='', view_perm=True):
+def export_into_meeting(request, motion_process, meeting,
+                        as_userid='',
+                        view_perm=True,
+                        states=['endorsed']):
     results = {'prop': 0, 'ai': 0}
     creators = set()
-    for motion in _get_motions(request, motion_process):
+    for motion in _get_motions(request, motion_process, states):
         creators.update(set(motion.creator))
         results['ai'] += 1
         ai = request.content_factories['AgendaItem'](
