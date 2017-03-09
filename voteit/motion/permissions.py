@@ -5,6 +5,7 @@ ADD_MOTION = "Add motion"
 ENDORSE_MOTION = "Endorse motion"
 CHECK_EMAIL_AGAINST_HASHLIST = "Check email against hashlist"
 ENABLE_MOTION_SHARING = "Enable motion sharing"
+ASSIGN_HASHTAGS = "Assign hashtags"
 
 
 EDITOR_PERMS = [
@@ -19,7 +20,8 @@ EDITOR_PERMS = [
 
 ADMIN_PERMS = [
     security.PERM_MANAGE_USERS,
-    security.MANAGE_SERVER
+    security.MANAGE_SERVER,
+    ASSIGN_HASHTAGS,
 ]
 
 

@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import colander
 import deform
+from arche.interfaces import ISchemaCreatedEvent
 from arche.models.workflow import get_workflows
 from arche.widgets import deferred_autocompleting_userid_widget
 from arche.widgets import ReferenceWidget
@@ -10,6 +11,7 @@ from repoze.catalog.query import Eq
 from voteit.core.security import MODERATE_MEETING
 
 from voteit.motion import _
+from voteit.motion.permissions import ASSIGN_HASHTAGS
 
 
 class MotionProcessSchema(colander.Schema):
@@ -210,9 +212,30 @@ class ExportMotionsSchema(colander.Schema):
     )
 
 
+_HASHTAG_PATTERN = "^[a-zA-Z0-9\-\_\.]{2,30}$"
+
+
+def add_hashtag_to_schema(schema, event):
+    if event.request.has_permission(ASSIGN_HASHTAGS):
+        schema.add(
+            colander.SchemaNode(
+                colander.String(),
+                name="hashtag",
+                title=_("Hashtag for Agenda Item"),
+                description=_("ai_hashtag_schema_description",
+                              default="Only used by systems that implement agenda based hashtags. "
+                                      "It's usually a good idea to leave this empty if you "
+                                      "don't have a special reason to change it."),
+                missing="",
+                validator=colander.Regex(_HASHTAG_PATTERN,
+                                         msg=_("Must be a-z, 0-9, or any of '.-_'."))
+            )
+        )
+
+
 def includeme(config):
     config.add_schema('MotionProcess', MotionProcessSchema, ['add', 'edit'])
     config.add_schema('Motion', MotionSchema, ('add', 'edit'))
     config.add_schema('Motion', EditEndorsementsSchema, 'endorsements')
     config.add_schema('MotionProcess', ExportMotionsSchema, 'export_motions')
-
+    config.add_subscriber(add_hashtag_to_schema, [MotionSchema, ISchemaCreatedEvent])

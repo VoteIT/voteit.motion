@@ -26,6 +26,7 @@ def export_into_meeting(request, motion_process, meeting,
             title=motion.title,
             description=motion.description,
             body=motion.body,
+            hashtag=motion.hashtag,
         )
         name = generate_slug(meeting, ai.title)
         meeting[name] = ai

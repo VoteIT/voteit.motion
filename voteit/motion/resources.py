@@ -61,6 +61,7 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
     body = ""
     endorsements_text = ""
     sharing_token = None
+    hashtag = ""
     _proposals = ()
     _creator = ()
     _endorsements = {}
