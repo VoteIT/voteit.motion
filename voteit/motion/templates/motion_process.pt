@@ -37,6 +37,7 @@
                     <a href="${request.resource_url(obj)}">
                     ${obj.title}
                     </a>
+                    <span tal:condition="obj.hashtag" class="label label-primary pull-right">#${obj.hashtag}</span>
                 </td>
                 <td>
                     ${structure: request.creators_info(obj.creator, no_tag=True)}
