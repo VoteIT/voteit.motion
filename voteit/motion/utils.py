@@ -2,7 +2,10 @@ from arche.utils import generate_slug
 from pyramid.traversal import resource_path
 from repoze.catalog.query import Any
 from repoze.catalog.query import Eq
+from voteit.core.helpers import tags2links
 from voteit.core.security import ROLE_VIEWER
+from webhelpers.html.converters import nl2br
+from webhelpers.html.tools import auto_link
 
 
 def _get_motions(request, context, states):
@@ -11,6 +14,12 @@ def _get_motions(request, context, states):
             Eq('path', resource_path(context))
     docids = request.root.catalog.query(query, sort_index='created')[1]
     return request.resolve_docids(docids, perm=None)
+
+
+def _transform_text(text):
+    text = auto_link(text)
+    text = nl2br(text)
+    return tags2links(unicode(text))
 
 
 def export_into_meeting(request, motion_process, meeting,
@@ -25,7 +34,7 @@ def export_into_meeting(request, motion_process, meeting,
         ai = request.content_factories['AgendaItem'](
             title=motion.title,
             description=motion.description,
-            body=motion.body,
+            body=_transform_text(motion.body),
             hashtag=motion.hashtag,
         )
         name = generate_slug(meeting, ai.title)
@@ -42,6 +51,7 @@ def export_into_meeting(request, motion_process, meeting,
             )
             name = generate_slug(ai, proposal.text)
             ai[name] = proposal
-    for userid in creators:
-        meeting.local_roles.add(userid, ROLE_VIEWER)
+    if view_perm:
+        for userid in creators:
+            meeting.local_roles.add(userid, ROLE_VIEWER)
     return results
