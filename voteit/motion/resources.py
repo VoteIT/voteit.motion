@@ -136,3 +136,12 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
 def includeme(config):
     config.add_content_factory(MotionProcess, addable_to=['Root', 'Folder'])
     config.add_content_factory(Motion, addable_to='MotionProcess')
+    #Patch agenda items to remember where they came from
+    from voteit.core.models.agenda_item import AgendaItem
+    #old-style properties for this...
+    #FIXME: will be changed in VoteIT
+    def _get_motion_uid(self):
+        return self.get_field_value('motion_uid', "")
+    def _set_motion_uid(self, value):
+        self.set_field_value('motion_uid', value)
+    AgendaItem.motion_uid = property(_get_motion_uid, _set_motion_uid)
