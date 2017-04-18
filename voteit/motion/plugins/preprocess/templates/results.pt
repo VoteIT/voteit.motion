@@ -10,10 +10,14 @@
     </div>
 
     <div class="modal-body">
-        <div class="list-group-item" tal:repeat="(k, v) tags.items()">
-            ${v}
-            <span class="badge">${results.get(k, 0)}</span>
-        </div>
+        <table class="table table-striped table-hover">
+            <tbody>
+                <tr tal:repeat="(k, v) tags.items()">
+                    <td>${v}</td>
+                    <td><span class="badge">${results.get(k, 0)}</span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="modal-footer clearfix">
