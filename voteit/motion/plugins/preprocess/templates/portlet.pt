@@ -1,0 +1,37 @@
+<tal:main xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:tal="http://xml.zope.org/namespaces/tal"
+          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="voteit.motion">
+    <div class="col-sm-12">
+        <div class="list-group">
+            <div class="list-group-item">
+                <h4>
+                    <span class="${icon_cls}"></span>
+                    ${title}
+                </h4>
+                <div>${structure: body}</div>
+            </div>
+            <div class="well" id="${portlet.uid}">
+
+                <a tal:condition="can_add"
+                   data-open-modal
+                  href="${request.resource_url(context, '_preprocess_form', query={'portlet': portlet.uid})}"
+                  class="btn btn-primary">
+                  <span data-actionmarker="glyphicon glyphicon-refresh rotate-me"></span>
+                  ${portlet.settings.get('button_caption', 'Add')}
+                </a>
+
+                <a data-open-modal
+                    href="${request.resource_url(context, '_preprocess_results', query={'portlet': portlet.uid})}"
+                    class="btn btn-default">
+                    <span i18n:translate="">Results</span>
+                </a>
+
+                <tal:cant_add condition="not can_add" i18n:translate="">
+                    Process not open
+                </tal:cant_add>
+
+            </div>
+        </div>
+    </div>
+</tal:main>
