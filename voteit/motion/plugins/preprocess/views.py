@@ -4,8 +4,8 @@ from pyramid.httpexceptions import HTTPForbidden
 from pyramid.renderers import render
 from pyramid.response import Response
 from pyramid.view import view_config
-from six import string_types
 from voteit.core.models.interfaces import IAgendaItem
+from voteit.core.models.interfaces import IMeeting
 from voteit.core.security import VIEW
 
 from voteit.motion import _
@@ -100,18 +100,34 @@ class PreprocessResultsView(BaseView):
         return get_portlet(self.request, portlet_uid)
 
     def __call__(self):
-        tags = IPreprocessUserTags(self.context)
-        results = {}
-        for row in tags.values():
-            if isinstance(row, string_types):
-                results.setdefault(row, 0)
-                results[row] += 1
-            else:
-                for k in row:
-                    results.setdefault(k, 0)
-                    results[k] += 1
-        tags = dict([(x['name'], x['title']) for x in self.portlet.settings.get('tags_selectable', ())])
+        preprocess_tags = IPreprocessUserTags(self.context)
+        results = preprocess_tags.get_results()
+        tags = self.portlet.portlet_adapter.get_tags()
         return {'tags': tags, 'results': results}
+
+
+@view_config(context = IMeeting,
+             name='_preprocess_all_results',
+             renderer='voteit.motion.plugins.preprocess:templates/all_results.pt',
+             permission=VIEW)
+class PreprocessAllResultsView(BaseView):
+
+    @reify
+    def portlet(self):
+        portlet_uid = self.request.GET.get('portlet', '')
+        return get_portlet(self.request, portlet_uid)
+
+    def __call__(self):
+        tags = self.portlet.portlet_adapter.get_tags()
+        return {'tags': tags}
+
+    def get_ai_results(self):
+        for obj in self.context.values():
+            if IAgendaItem.providedBy(obj):
+                preprocess_tags = IPreprocessUserTags(obj)
+                results = preprocess_tags.get_results()
+                if results:
+                    yield obj, results
 
 
 def includeme(config):

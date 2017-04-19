@@ -31,6 +31,11 @@ class PreprocessPortlet(PortletType):
         return settings.get('process_open', False) and \
                request.has_permission(settings.get('tags_perm', object()), context)
 
+    def get_tags(self):
+        return dict(
+            [(x['name'], x['title']) for x in self.portlet.settings.get('tags_selectable', ())]
+        )
+
 
 def includeme(config):
     config.add_portlet(PreprocessPortlet)
