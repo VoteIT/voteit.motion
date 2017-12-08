@@ -1,4 +1,7 @@
+from datetime import timedelta
+
 from arche.utils import generate_slug
+from arche.utils import utcnow
 from pyramid.traversal import resource_path
 from repoze.catalog.query import Any
 from repoze.catalog.query import Eq
@@ -40,15 +43,20 @@ def export_into_meeting(request, motion_process, meeting,
         )
         name = generate_slug(meeting, ai.title)
         meeting[name] = ai
+        now = utcnow()
+        offset = 0
         for prop_text in motion.proposals:
             results['prop'] += 1
             if as_userid:
                 creator = (as_userid,)
             else:
                 creator = tuple(motion.creator)
+            created = now + timedelta(seconds=offset)
+            offset += 2
             proposal = request.content_factories['Proposal'](
                 text=prop_text,
                 creator=creator,
+                created=created,
             )
             name = generate_slug(ai, proposal.text)
             ai[name] = proposal
