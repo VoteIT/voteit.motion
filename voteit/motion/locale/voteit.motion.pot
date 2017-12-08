@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2017-12-08 13:15+0100\n"
+"POT-Creation-Date: 2017-12-08 15:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -161,33 +161,43 @@ msgstr ""
 msgid "as_userid_schema_description"
 msgstr ""
 
-#. Default: Give included users view permission within the meeting
 #: ././voteit/motion/schemas.py:200
+msgid "Clear ownership of proposals?"
+msgstr ""
+
+#. Default: This makes the original author unable to retract their proposals.
+#. It will still be added in their name.
+#: ././voteit/motion/schemas.py:201
+msgid "clear_ownership_description"
+msgstr ""
+
+#. Default: Give included users view permission within the meeting
+#: ././voteit/motion/schemas.py:208
 msgid "view_perm_schema_title"
 msgstr ""
 
 #. Default: If you're adding proposals as a specific user, the original
 #. creators will get the view permission from this setting.
-#: ././voteit/motion/schemas.py:203
+#: ././voteit/motion/schemas.py:211
 msgid "view_perm_schema_description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:210
+#: ././voteit/motion/schemas.py:218
 msgid "Include these states in the export"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:225
+#: ././voteit/motion/schemas.py:233
 msgid "Hashtag for Agenda Item"
 msgstr ""
 
 #. Default: Only used by systems that implement agenda based hashtags. It's
 #. usually a good idea to leave this empty if you don't have a special reason
 #. to change it.
-#: ././voteit/motion/schemas.py:226
+#: ././voteit/motion/schemas.py:234
 msgid "ai_hashtag_schema_description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:232
+#: ././voteit/motion/schemas.py:240
 msgid "Must be a-z, 0-9, or any of '.-_'."
 msgstr ""
 
@@ -201,52 +211,52 @@ msgstr ""
 
 #. Default: Created ${ai} agenda items and ${prop} proposals within this
 #. meeting.
-#: ././voteit/motion/views.py:79
+#: ././voteit/motion/views.py:81
 msgid "export_success_message"
 msgstr ""
 
-#: ././voteit/motion/views.py:111
+#: ././voteit/motion/views.py:113
 msgid "(Unknown)"
 msgstr ""
 
 #. Default: Sharing enalbed - use the link below.
-#: ././voteit/motion/views.py:132
+#: ././voteit/motion/views.py:134
 msgid "sharing_switched_on"
 msgstr ""
 
 #. Default: Sharing switched off - motion not accessible unless you're logged
 #. in.
-#: ././voteit/motion/views.py:137
+#: ././voteit/motion/views.py:139
 msgid "sharing_switched_off"
 msgstr ""
 
 #. Default: You're now endorsing this motion.
-#: ././voteit/motion/views.py:152
+#: ././voteit/motion/views.py:154
 msgid "youre_now_endorsing"
 msgstr ""
 
 #. Default: You're no longer endorsing this motion.
-#: ././voteit/motion/views.py:159
+#: ././voteit/motion/views.py:161
 msgid "your_endorsement_removed"
 msgstr ""
 
-#: ././voteit/motion/views.py:176
+#: ././voteit/motion/views.py:178
 msgid "Must be logged in"
 msgstr ""
 
-#: ././voteit/motion/views.py:178
+#: ././voteit/motion/views.py:180
 msgid "You need to have a validated email address to use this. "
 msgstr ""
 
 #. Default: You've been granted access to add motions (if process is open) and
 #. to endorse motions.
-#: ././voteit/motion/views.py:189
+#: ././voteit/motion/views.py:191
 msgid "granted_access_message"
 msgstr ""
 
 #. Default: We couldn't find your email address. Please contact the
 #. organisation responsible for this process to gain access.
-#: ././voteit/motion/views.py:194
+#: ././voteit/motion/views.py:196
 msgid "not_found_when_checked_against_hashlist"
 msgstr ""
 
