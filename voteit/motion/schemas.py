@@ -14,6 +14,14 @@ from voteit.motion import _
 from voteit.motion.permissions import ASSIGN_HASHTAGS
 
 
+MOTION_VISIBILITY = (
+    ('', _("<Select>")),
+    ('hidden', _("All hidden (unless sharing links are used)")),
+    ('authenticated', _("Logged in can read all non-drafts")),
+    ('everyone', _("Visible to everyone")),
+)
+
+
 class MotionProcessSchema(colander.Schema):
     title = colander.SchemaNode(
         colander.String(),
@@ -51,14 +59,7 @@ class MotionProcessSchema(colander.Schema):
     motion_visibility = colander.SchemaNode(
         colander.String(),
         title=_("Motion visibility"),
-        widget=deform.widget.SelectWidget(
-            values=(
-                ('', _("<Select>")),
-                ('hidden', _("All hidden (unless sharing links are used)")),
-                ('authenticated', _("Logged in can read all non-drafts")),
-                ('everyone', _("Visible to everyone")),
-            )
-        )
+        widget=deform.widget.SelectWidget(values=MOTION_VISIBILITY)
     )
     hashlist_uids = colander.SchemaNode(
         colander.Sequence(),

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns="http://www.w3.org/1999/xhtml"
       metal:use-macro="view.macro('arche:templates/base_view.pt')"
       i18n:domain="voteit.motion">
 <body>
@@ -97,20 +97,42 @@
     </div>
 
     <div class="row" tal:condition="can_submit or can_delete">
-        <div class="col-sm-12"><hr/></div>
+        <div class="col-sm-12">
+            <hr/>
+        </div>
         <div class="col-sm-6">
             <tal:submit condition="can_submit">
-            <p>
-                <strong i18n:translate="submit_for_review_warning">
-                    Note: You will not be able to make changes after the
-                    motion is submitted for review!
-                </strong>
-            </p>
-            <p>
-            <a href="${request.resource_url(context, '__wf_transition__', query = {'id': 'review', 'return_url': request.url})}"
-               class="btn btn-warning"
-               i18n:translate="">Submit for review</a>
-            </p>
+                <a class="btn btn-warning" role="button"
+                   data-toggle="collapse" href="#submit-collapse"
+                   aria-expanded="false" aria-controls="submit-collapse">
+                    <span i18n:translate="">Submit motion...</span>
+                </a>
+
+                <div class="collapse" id="submit-collapse">
+                    <div class="well">
+
+                        <p>
+                            <strong i18n:translate="submit_for_review_warning">
+                                Note: You will not be able to make changes after the
+                                motion is submitted for review!
+                            </strong>
+                        </p>
+                        <p>
+                            <tal:ts i18n:translate="motion_visibility_when_submitted">
+                                When you've submittied your motion,
+                                it may be visible to other users. The setting for this motion is:
+                            </tal:ts>
+                            <br/>
+                            <strong>${motion_visibility}</strong>
+                        </p>
+
+                        <p class="text-right">
+                            <a href="${request.resource_url(context, '__wf_transition__', query = {'id': 'review', 'return_url': request.url})}"
+                               class="btn btn-warning"
+                               i18n:translate="">Submit for review</a>
+                        </p>
+                    </div>
+                </div>
             </tal:submit>
         </div>
         <div class="col-sm-6" tal:condition="can_delete">
@@ -124,15 +146,16 @@
             </div>
 
             <div class="collapse" id="danger-collapse">
-              <div class="well">
-                <p i18n:translate="changed_your_mind_delete">If you've changed your mind and don't want to hand in this motion:
-                </p>
-                <p>
-                <a href="${request.resource_url(context, 'delete')}"
-                   class="text-danger"
-                   i18n:translate="">Delete motion permanently</a>
-                </p>
-              </div>
+                <div class="well">
+                    <p i18n:translate="changed_your_mind_delete">If you've changed your mind and
+                        don't want to hand in this motion:
+                    </p>
+                    <p class="text-right">
+                        <a href="${request.resource_url(context, 'delete')}"
+                           class="btn btn-danger"
+                           i18n:translate="">Delete motion permanently</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -157,8 +180,8 @@
             </p>
             <p>
                 <a href="${request.resource_url(context, 'toggle_sharing', query={'s': 'off'})}"
-                    class="text-danger"
-                    i18n:translate="switch_sharing_off_btn">
+                   class="text-danger"
+                   i18n:translate="switch_sharing_off_btn">
                     Switch off sharing and disable link
                 </a>
             </p>
@@ -168,13 +191,14 @@
         <hr/>
 
         <p i18n:translate="enable_sharing_explanation">
-            If you enable sharing, a link will be created where anonymous users may read this motion.
+            If you enable sharing, a link will be created where anonymous users may read this
+            motion.
             It's also possible to share the created link on social media and similar.
         </p>
         <p>
             <a href="${request.resource_url(context, 'toggle_sharing', query={'s': 'on'})}"
                class="text-warning"
-                i18n:translate="switch_sharing_on_btn">
+               i18n:translate="switch_sharing_on_btn">
                 Enable sharing
             </a>
         </p>

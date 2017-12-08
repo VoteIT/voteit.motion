@@ -17,6 +17,7 @@ from voteit.core.security import EDIT
 from voteit.core.security import DELETE
 from voteit.core.security import VIEW
 from voteit.core.security import MANAGE_SERVER
+from voteit.motion.schemas import MOTION_VISIBILITY
 from voteit.motion.utils import export_into_meeting
 from webhelpers.html.converters import nl2br
 from webhelpers.html.render import sanitize
@@ -99,13 +100,16 @@ class MotionView(BaseView):
     def main_view(self):
         can_submit = self.context.wf_state == 'draft' and \
                      self.request.has_permission(CHANGE_WORKFLOW_STATE, self.context)
+        motion_process = find_interface(self.context, IMotionProcess)
         return {'can_submit': can_submit,
                 'can_delete': self.request.has_permission(DELETE, self.context),
                 'can_edit': self.request.has_permission(EDIT, self.context),
                 'can_endorse': self.request.authenticated_userid not in self.context.creator and
                                self.request.has_permission(ENDORSE_MOTION, self.context),
                 'can_enable_sharing': self.request.has_permission(ENABLE_MOTION_SHARING, self.context),
-                'check_email_snippet': render_check_email_snippet(self.context, self.request)}
+                'check_email_snippet': render_check_email_snippet(self.context, self.request),
+                'motion_visibility': dict(MOTION_VISIBILITY).get(motion_process.motion_visibility, _("(Unknown)")),
+                }
 
     @view_config(name='_ts', permission=NO_PERMISSION_REQUIRED)
     def token_view(self):
