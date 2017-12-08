@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2017-04-18 11:12+0200\n"
+"POT-Creation-Date: 2017-12-08 13:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
-"Generated-By: Lingua 4.9\n"
+"Generated-By: Lingua 4.7\n"
 
 #: ././voteit/motion/resources.py:35
 msgid "Motion process"
@@ -24,170 +24,170 @@ msgstr ""
 msgid "Motion"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:20 ././voteit/motion/schemas.py:82
+#: ././voteit/motion/schemas.py:18 ././voteit/motion/schemas.py:150
+msgid "<Select>"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:19
+msgid "All hidden (unless sharing links are used)"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:20
+msgid "Logged in can read all non-drafts"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:21
+msgid "Visible to everyone"
+msgstr ""
+
+#: ././voteit/motion/schemas.py:28 ././voteit/motion/schemas.py:83
 #: ././voteit/motion/plugins/preprocess/schemas.py:47
 #: ././voteit/motion/templates/motion_process.pt:24
 msgid "Title"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:24
+#: ././voteit/motion/schemas.py:32
 msgid "Description"
 msgstr ""
 
 #. Default: Short description, visible as lead-in and on searches.
-#: ././voteit/motion/schemas.py:26 ././voteit/motion/schemas.py:88
+#: ././voteit/motion/schemas.py:34 ././voteit/motion/schemas.py:89
 msgid "schema_description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:31 ././voteit/motion/schemas.py:93
+#: ././voteit/motion/schemas.py:39 ././voteit/motion/schemas.py:94
 msgid "Text body"
 msgstr ""
 
 #. Default: This is the description text for participants in the motion
 #. process. It's always a good idea to include some basic instructions and
 #. important dates as when the process opens and closes.
-#: ././voteit/motion/schemas.py:33
+#: ././voteit/motion/schemas.py:41
 msgid "schema_body_description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:41
+#: ././voteit/motion/schemas.py:49
 msgid "Allow endorsements"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:45
+#: ././voteit/motion/schemas.py:53
 msgid "Allow users to create sharing link"
 msgstr ""
 
 #. Default: If the motions are private, allow users to create sharing links to
 #. publish their motions to anyone.
-#: ././voteit/motion/schemas.py:46
+#: ././voteit/motion/schemas.py:54
 msgid "allow_sharing_link_schema_description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:53
+#: ././voteit/motion/schemas.py:61
 msgid "Motion visibility"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:56 ././voteit/motion/schemas.py:149
-msgid "<Select>"
-msgstr ""
-
-#: ././voteit/motion/schemas.py:57
-msgid "All hidden (unless sharing links are used)"
-msgstr ""
-
-#: ././voteit/motion/schemas.py:58
-msgid "Logged in can read all non-drafts"
-msgstr ""
-
-#: ././voteit/motion/schemas.py:59
-msgid "Visible to everyone"
-msgstr ""
-
-#: ././voteit/motion/schemas.py:68
+#: ././voteit/motion/schemas.py:69
 msgid "Hashlists"
 msgstr ""
 
 #. Default: Users in this hashlist may gain permission to participate
-#: ././voteit/motion/schemas.py:71
+#: ././voteit/motion/schemas.py:72
 msgid "hashlist_uids_schema_title"
 msgstr ""
 
 #. Default: Requires package arche_hashlist to work. Users will need to have
 #. their email address validated + pass a check against the hashlist.
-#: ././voteit/motion/schemas.py:73
+#: ././voteit/motion/schemas.py:74
 msgid "hashlist_uids_schema_description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:86
+#: ././voteit/motion/schemas.py:87
 msgid "Short description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:95
+#: ././voteit/motion/schemas.py:96
 msgid "Your motion text, excluding proposals"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:103
+#: ././voteit/motion/schemas.py:104
 msgid "Proposal"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:106
+#: ././voteit/motion/schemas.py:107
 msgid "Proposals - add at least one"
 msgstr ""
 
 #. Default: Proposals must be written in a way so it's possible to approve or
 #. deny each one. Don't give any background information or similar here.
-#: ././voteit/motion/schemas.py:107
+#: ././voteit/motion/schemas.py:108
 msgid "motion_proposals_schema_description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:122
+#: ././voteit/motion/schemas.py:123
 msgid "UserID"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:128
+#: ././voteit/motion/schemas.py:129
 msgid "Other endorsements"
 msgstr ""
 
 #. Default: From people who doesn't have an account here or perhaps from other
 #. groups.
-#: ././voteit/motion/schemas.py:129
+#: ././voteit/motion/schemas.py:130
 msgid "written_endorsements_description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:178
+#: ././voteit/motion/schemas.py:179
 msgid ""
 "Export motions into a meeting. Each motion will be it's own agenda item."
 msgstr ""
 
-#: ././voteit/motion/schemas.py:181
+#: ././voteit/motion/schemas.py:182
 #: ././voteit/motion/templates/motion_process.pt:93
 msgid "Export into meeting"
 msgstr ""
 
 #. Default: You must be moderator in the meeting you wish to export to.
-#: ././voteit/motion/schemas.py:184
+#: ././voteit/motion/schemas.py:185
 msgid "export_meeting_schema_desc"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:189
+#: ././voteit/motion/schemas.py:190
 msgid "Add all proposals as this user"
 msgstr ""
 
 #. Default: If you want to override the default behaviour to add proposals as
 #. the person who wrote them. Not recommended unless you have a good reason to
 #. do so!
-#: ././voteit/motion/schemas.py:190
+#: ././voteit/motion/schemas.py:191
 msgid "as_userid_schema_description"
 msgstr ""
 
 #. Default: Give included users view permission within the meeting
-#: ././voteit/motion/schemas.py:199
+#: ././voteit/motion/schemas.py:200
 msgid "view_perm_schema_title"
 msgstr ""
 
 #. Default: If you're adding proposals as a specific user, the original
 #. creators will get the view permission from this setting.
-#: ././voteit/motion/schemas.py:202
+#: ././voteit/motion/schemas.py:203
 msgid "view_perm_schema_description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:209
+#: ././voteit/motion/schemas.py:210
 msgid "Include these states in the export"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:224
+#: ././voteit/motion/schemas.py:225
 msgid "Hashtag for Agenda Item"
 msgstr ""
 
 #. Default: Only used by systems that implement agenda based hashtags. It's
 #. usually a good idea to leave this empty if you don't have a special reason
 #. to change it.
-#: ././voteit/motion/schemas.py:225
+#: ././voteit/motion/schemas.py:226
 msgid "ai_hashtag_schema_description"
 msgstr ""
 
-#: ././voteit/motion/schemas.py:231
+#: ././voteit/motion/schemas.py:232
 msgid "Must be a-z, 0-9, or any of '.-_'."
 msgstr ""
 
@@ -195,54 +195,58 @@ msgstr ""
 msgid "Participate motion proc."
 msgstr ""
 
-#: ././voteit/motion/views.py:65
+#: ././voteit/motion/views.py:66
 msgid "Export"
 msgstr ""
 
 #. Default: Created ${ai} agenda items and ${prop} proposals within this
 #. meeting.
-#: ././voteit/motion/views.py:78
+#: ././voteit/motion/views.py:79
 msgid "export_success_message"
 msgstr ""
 
+#: ././voteit/motion/views.py:111
+msgid "(Unknown)"
+msgstr ""
+
 #. Default: Sharing enalbed - use the link below.
-#: ././voteit/motion/views.py:128
+#: ././voteit/motion/views.py:132
 msgid "sharing_switched_on"
 msgstr ""
 
 #. Default: Sharing switched off - motion not accessible unless you're logged
 #. in.
-#: ././voteit/motion/views.py:133
+#: ././voteit/motion/views.py:137
 msgid "sharing_switched_off"
 msgstr ""
 
 #. Default: You're now endorsing this motion.
-#: ././voteit/motion/views.py:148
+#: ././voteit/motion/views.py:152
 msgid "youre_now_endorsing"
 msgstr ""
 
 #. Default: You're no longer endorsing this motion.
-#: ././voteit/motion/views.py:155
+#: ././voteit/motion/views.py:159
 msgid "your_endorsement_removed"
 msgstr ""
 
-#: ././voteit/motion/views.py:172
+#: ././voteit/motion/views.py:176
 msgid "Must be logged in"
 msgstr ""
 
-#: ././voteit/motion/views.py:174
+#: ././voteit/motion/views.py:178
 msgid "You need to have a validated email address to use this. "
 msgstr ""
 
 #. Default: You've been granted access to add motions (if process is open) and
 #. to endorse motions.
-#: ././voteit/motion/views.py:185
+#: ././voteit/motion/views.py:189
 msgid "granted_access_message"
 msgstr ""
 
 #. Default: We couldn't find your email address. Please contact the
 #. organisation responsible for this process to gain access.
-#: ././voteit/motion/views.py:190
+#: ././voteit/motion/views.py:194
 msgid "not_found_when_checked_against_hashlist"
 msgstr ""
 
@@ -382,8 +386,23 @@ msgstr ""
 msgid "Settings removed"
 msgstr ""
 
+#: ././voteit/motion/plugins/preprocess/templates/all_results.pt:8
+#: ././voteit/motion/plugins/preprocess/templates/all_results.pt:33
+#: ././voteit/motion/plugins/preprocess/templates/results.pt:8
+#: ././voteit/motion/plugins/preprocess/templates/results.pt:33
+msgid "Close"
+msgstr ""
+
+#: ././voteit/motion/plugins/preprocess/templates/all_results.pt:9
+msgid "All results"
+msgstr ""
+
+#: ././voteit/motion/plugins/preprocess/templates/all_results.pt:13
+msgid "Showing all agenda items with results."
+msgstr ""
+
 #: ././voteit/motion/plugins/preprocess/templates/portlet.pt:27
-#: ././voteit/motion/plugins/preprocess/templates/results.pt:9
+#: ././voteit/motion/plugins/preprocess/templates/results.pt:11
 msgid "Results"
 msgstr ""
 
@@ -391,9 +410,8 @@ msgstr ""
 msgid "Process not open"
 msgstr ""
 
-#: ././voteit/motion/plugins/preprocess/templates/results.pt:8
-#: ././voteit/motion/plugins/preprocess/templates/results.pt:21
-msgid "Close"
+#: ././voteit/motion/plugins/preprocess/templates/results.pt:15
+msgid "Show all results"
 msgstr ""
 
 #. Default: Check your permissions to participate in the motion process.
@@ -456,58 +474,68 @@ msgstr ""
 msgid "No longer endorse motion"
 msgstr ""
 
+#: ././voteit/motion/templates/motion.pt:108
+msgid "Submit motion..."
+msgstr ""
+
 #. Default: Note: You will not be able to make changes after the motion is
 #. submitted for review!
-#: ././voteit/motion/templates/motion.pt:104
+#: ././voteit/motion/templates/motion.pt:115
 msgid "submit_for_review_warning"
 msgstr ""
 
-#: ././voteit/motion/templates/motion.pt:112
+#. Default: When you've submittied your motion, it may be visible to other
+#. users. The setting for this motion is:
+#: ././voteit/motion/templates/motion.pt:121
+msgid "motion_visibility_when_submitted"
+msgstr ""
+
+#: ././voteit/motion/templates/motion.pt:132
 msgid "Submit for review"
 msgstr ""
 
-#: ././voteit/motion/templates/motion.pt:122
+#: ././voteit/motion/templates/motion.pt:144
 msgid "Delete motion..."
 msgstr ""
 
 #. Default: If you've changed your mind and don't want to hand in this motion:
-#: ././voteit/motion/templates/motion.pt:128
+#: ././voteit/motion/templates/motion.pt:150
 msgid "changed_your_mind_delete"
 msgstr ""
 
-#: ././voteit/motion/templates/motion.pt:133
+#: ././voteit/motion/templates/motion.pt:156
 msgid "Delete motion permanently"
 msgstr ""
 
 #. Default: To share this motion with anonymous users, send them this link.
 #. It's also possible to share this link on social media and similar.
-#: ././voteit/motion/templates/motion.pt:143
+#: ././voteit/motion/templates/motion.pt:166
 msgid "share_link_explanation"
 msgstr ""
 
 #. Default: If you want to stop the link above from working you may do so.
-#: ././voteit/motion/templates/motion.pt:155
+#: ././voteit/motion/templates/motion.pt:178
 msgid "disable_sharing_explanation"
 msgstr ""
 
 #. Default: Switch off sharing and disable link
-#: ././voteit/motion/templates/motion.pt:161
+#: ././voteit/motion/templates/motion.pt:184
 msgid "switch_sharing_off_btn"
 msgstr ""
 
 #. Default: If you enable sharing, a link will be created where anonymous users
 #. may read this motion. It's also possible to share the created link on social
 #. media and similar.
-#: ././voteit/motion/templates/motion.pt:170
+#: ././voteit/motion/templates/motion.pt:193
 msgid "enable_sharing_explanation"
 msgstr ""
 
 #. Default: Enable sharing
-#: ././voteit/motion/templates/motion.pt:177
+#: ././voteit/motion/templates/motion.pt:201
 msgid "switch_sharing_on_btn"
 msgstr ""
 
-#: ././voteit/motion/templates/motion.pt:188
+#: ././voteit/motion/templates/motion.pt:212
 msgid "Back"
 msgstr ""
 
