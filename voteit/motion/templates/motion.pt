@@ -55,7 +55,7 @@
         </div>
 
         <div class="col-sm-6">
-            <h3>
+            <h3 tal:condition="context.endorsements_info or context.endorsements_text or can_endorse">
                 <span i18n:translate="">Endorsements</span>
             </h3>
             <ul>
