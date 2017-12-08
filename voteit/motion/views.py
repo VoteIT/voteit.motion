@@ -72,8 +72,10 @@ class ExportMotionsForm(BaseForm):
         as_userid = appstruct['as_userid']
         view_perm = appstruct['view_perm']
         states = appstruct['states_to_include']
+        clear_ownership = appstruct['clear_ownership']
         results = export_into_meeting(self.request, self.context, meeting,
                                       as_userid=as_userid,
+                                      clear_ownership=clear_ownership,
                                       view_perm=view_perm,
                                       states=states)
         msg = _("export_success_message",

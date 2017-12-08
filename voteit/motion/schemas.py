@@ -195,6 +195,14 @@ class ExportMotionsSchema(colander.Schema):
         missing="",
         widget=deferred_autocompleting_userid_widget,
     )
+    clear_ownership = colander.SchemaNode(
+        colander.Bool(),
+        title=_("Clear ownership of proposals?"),
+        description=_(
+            "clear_ownership_description",
+            default="This makes the original author unable to retract their proposals. "
+                    "It will still be added in their name.")
+    )
     view_perm = colander.SchemaNode(
         colander.Bool(),
         title=_("view_perm_schema_title",
