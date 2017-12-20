@@ -27,14 +27,13 @@ class MotionProcessSchema(colander.Schema):
         colander.String(),
         title=_("Title"),
     )
-    #FIXME: The description field is currently deactivated. We might want to use this later on
-    # description = colander.SchemaNode(
-    #     colander.String(),
-    #     title=_("Description"),
-    #     missing="",
-    #     description=_("schema_description",
-    #                   default="Short description, visible as lead-in and on searches."),
-    # )
+    description = colander.SchemaNode(
+        colander.String(),
+        title=_("Description"),
+        missing="",
+        description=_("schema_description",
+                      default="Short description, visible as lead-in and on searches."),
+    )
     body = colander.SchemaNode(
         colander.String(),
         title=_("Text body"),
@@ -83,13 +82,14 @@ class MotionSchema(colander.Schema):
         colander.String(),
         title=_("Title"),
     )
-    description = colander.SchemaNode(
-        colander.String(),
-        title=_("Short description"),
-        missing="",
-        description=_("schema_description",
-                      default="Short description, visible as lead-in and on searches."),
-    )
+    #FIXME: The description field hidden for now. Needs better explanation
+    # description = colander.SchemaNode(
+    #     colander.String(),
+    #     title=_("Short description"),
+    #     missing="",
+    #     description=_("schema_description",
+    #                   default="Short description, visible as lead-in and on searches."),
+    # )
     body = colander.SchemaNode(
         colander.String(),
         title=_("Text body"),
