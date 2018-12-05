@@ -5,11 +5,18 @@ from arche.security import ROLE_AUTHENTICATED
 from arche.security import ROLE_EDITOR
 from arche.security import ROLE_EVERYONE
 from voteit.core import security
+try:
+    from arche_comments.security import ADD_COMMENT
+    from arche_comments.security import DELETE_COMMENT
+    from arche_comments.security import EDIT_COMMENT
+    from arche_comments.security import ENABLE_COMMENTS
+    has_comments = True
+except ImportError:
+    has_comments = False
 
 from voteit.motion import _
 from voteit.motion.permissions import ADD_MOTION
 from voteit.motion.permissions import CHECK_EMAIL_AGAINST_HASHLIST
-from voteit.motion.permissions import ENABLE_MOTION_SHARING
 from voteit.motion.permissions import ADMIN_PERMS
 from voteit.motion.permissions import ENDORSE_MOTION
 from voteit.motion.permissions import EDITOR_PERMS
@@ -83,6 +90,11 @@ class MotionWorkflow(Workflow):
             acl_entry.add(security.ROLE_VIEWER, [security.VIEW])
             if sname != 'lacked_endorsement':
                 acl_entry.add(ROLE_MOTION_PROCESS_PARTICIPANT, [ENDORSE_MOTION])
+            if has_comments:
+                acl_entry.add(ROLE_MOTION_PROCESS_PARTICIPANT, [ADD_COMMENT])
+                acl_entry.add(security.ROLE_OWNER, [ENABLE_COMMENTS, ADD_COMMENT, DELETE_COMMENT, EDIT_COMMENT])
+                acl_entry.add(security.ROLE_ADMIN, [ENABLE_COMMENTS, ADD_COMMENT, DELETE_COMMENT, EDIT_COMMENT])
+                acl_entry.add(ROLE_EDITOR, [ENABLE_COMMENTS, ADD_COMMENT])
         registry.acl[cls.name+':draft'].add(security.ROLE_OWNER,
                                             [security.EDIT,
                                              security.CHANGE_WORKFLOW_STATE,
