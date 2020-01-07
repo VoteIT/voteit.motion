@@ -13,10 +13,12 @@ from webhelpers.html.tools import auto_link
 
 
 def _get_motions(request, context, states):
-    query = Eq('type_name', 'Motion') & \
-            Any('wf_state', states) & \
-            Eq('path', resource_path(context))
-    docids = request.root.catalog.query(query, sort_index='created')[1]
+    query = (
+        Eq("type_name", "Motion")
+        & Any("wf_state", states)
+        & Eq("path", resource_path(context))
+    )
+    docids = request.root.catalog.query(query, sort_index="created")[1]
     return request.resolve_docids(docids, perm=None)
 
 
@@ -26,17 +28,21 @@ def _transform_text(text):
     return tags2links(unicode(text))
 
 
-def export_into_meeting(request, motion_process, meeting,
-                        as_userid='',
-                        view_perm=True,
-                        clear_ownership=False,
-                        states=['endorsed']):
-    results = {'prop': 0, 'ai': 0}
+def export_into_meeting(
+    request,
+    motion_process,
+    meeting,
+    as_userid="",
+    view_perm=True,
+    clear_ownership=False,
+    states=["endorsed"],
+):
+    results = {"prop": 0, "ai": 0}
     creators = set()
     for motion in _get_motions(request, motion_process, states):
         creators.update(set(motion.creator))
-        results['ai'] += 1
-        ai = request.content_factories['AgendaItem'](
+        results["ai"] += 1
+        ai = request.content_factories["AgendaItem"](
             title=motion.title,
             description=motion.description,
             body=_transform_text(motion.body),
@@ -48,17 +54,15 @@ def export_into_meeting(request, motion_process, meeting,
         now = utcnow()
         offset = 0
         for prop_text in motion.proposals:
-            results['prop'] += 1
+            results["prop"] += 1
             if as_userid:
                 creator = (as_userid,)
             else:
                 creator = tuple(motion.creator)
             created = now + timedelta(seconds=offset)
             offset += 2
-            proposal = request.content_factories['Proposal'](
-                text=prop_text,
-                creator=creator,
-                created=created,
+            proposal = request.content_factories["Proposal"](
+                text=prop_text, creator=creator, created=created
             )
             name = generate_slug(ai, proposal.text)
             ai[name] = proposal
@@ -66,7 +70,9 @@ def export_into_meeting(request, motion_process, meeting,
             # ownership when an object is added to the resource tree.
             # Hence do this check afterwards.
             if clear_ownership:
-                users_to_clear = set(proposal.local_roles.get_any_local_with(ROLE_OWNER))
+                users_to_clear = set(
+                    proposal.local_roles.get_any_local_with(ROLE_OWNER)
+                )
                 for userid in users_to_clear:
                     proposal.local_roles.remove(userid, ROLE_OWNER, event=False)
                 if users_to_clear:

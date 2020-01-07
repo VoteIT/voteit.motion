@@ -39,12 +39,13 @@ class MotionProcess(Content, ContextACLMixin, LocalRolesMixin):
     allow_endorsements = False
     allow_sharing_link = False
     allow_any_authenticated = False
-    motion_visibility = 'hidden'
+    motion_visibility = "hidden"
     _hashlist_uids = ()
 
     @property
     def hashlist_uids(self):
         return self._hashlist_uids
+
     @hashlist_uids.setter
     def hashlist_uids(self, value):
         self._hashlist_uids = tuple(value)
@@ -77,19 +78,20 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
             if motion_proc.allow_sharing_link == True:
                 acl_list.insert(0, (Allow, ROLE_OWNER, (ENABLE_MOTION_SHARING,)))
             wf = self.workflow
-            state = ''
+            state = ""
             if wf:
                 state = wf.state in wf.states and wf.state or wf.initial_state
-            if state and state != 'draft':
-                if motion_proc.motion_visibility == 'authenticated':
+            if state and state != "draft":
+                if motion_proc.motion_visibility == "authenticated":
                     acl_list.insert(0, (Allow, ROLE_AUTHENTICATED, (PERM_VIEW,)))
-                if motion_proc.motion_visibility == 'everyone':
+                if motion_proc.motion_visibility == "everyone":
                     acl_list.insert(0, (Allow, ROLE_EVERYONE, (PERM_VIEW,)))
         return acl_list
 
     @property
     def proposals(self):
         return tuple(self._proposals)
+
     @proposals.setter
     def proposals(self, value):
         if not isinstance(self._proposals, PersistentList):
@@ -101,6 +103,7 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
     @property
     def creator(self):
         return tuple(self._creator)
+
     @creator.setter
     def creator(self, value):
         if tuple(value) != self._creator:
@@ -109,15 +112,16 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
     @property
     def endorsements(self):
         return tuple(self._endorsements)
+
     @endorsements.setter
     def endorsements(self, value):
         if not isinstance(self._endorsements, OOBTree):
             self._endorsements = OOBTree()
-        #Add new with timestamp
+        # Add new with timestamp
         for userid in set(value) - set(self._endorsements):
             self.local_roles.add(userid, ROLE_VIEWER)
             self._endorsements[userid] = utcnow()
-        #Remove no longer endorsing userids
+        # Remove no longer endorsing userids
         for userid in set(self._endorsements) - set(value):
             del self._endorsements[userid]
             self.local_roles.remove(userid, ROLE_VIEWER)
@@ -127,7 +131,9 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
         return self._endorsements.items()
 
     def enable_sharing_token(self):
-        self.sharing_token = "".join([choice(string.letters + string.digits) for x in range(15)])
+        self.sharing_token = "".join(
+            [choice(string.letters + string.digits) for x in range(15)]
+        )
         return self.sharing_token
 
     def remove_sharing_token(self):
@@ -135,14 +141,17 @@ class Motion(Content, ContextACLMixin, LocalRolesMixin):
 
 
 def includeme(config):
-    config.add_content_factory(MotionProcess, addable_to=['Root', 'Folder'])
-    config.add_content_factory(Motion, addable_to='MotionProcess')
-    #Patch agenda items to remember where they came from
+    config.add_content_factory(MotionProcess, addable_to=["Root", "Folder"])
+    config.add_content_factory(Motion, addable_to="MotionProcess")
+    # Patch agenda items to remember where they came from
     from voteit.core.models.agenda_item import AgendaItem
-    #old-style properties for this...
-    #FIXME: will be changed in VoteIT
+
+    # old-style properties for this...
+    # FIXME: will be changed in VoteIT
     def _get_motion_uid(self):
-        return self.get_field_value('motion_uid', "")
+        return self.get_field_value("motion_uid", "")
+
     def _set_motion_uid(self, value):
-        self.set_field_value('motion_uid', value)
+        self.set_field_value("motion_uid", value)
+
     AgendaItem.motion_uid = property(_get_motion_uid, _set_motion_uid)
