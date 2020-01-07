@@ -1,25 +1,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-12-08 15:06+0100\n"
+"POT-Creation-Date: 2020-01-07 15:35+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Robin Harms Oredsson <robin@betahaus.net>\n"
 "Language-Team: \n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 2.2.1\n"
 
-#: voteit/motion/resources.py:35
-msgid "Motion process"
-msgstr "Motionsprocess"
+#: voteit/motion/security.py:9
+msgid "Participate motion proc."
+msgstr "Delta motionsproc."
 
-#: voteit/motion/resources.py:58
-msgid "Motion"
-msgstr "Motion"
-
-#: voteit/motion/schemas.py:18 voteit/motion/schemas.py:150
+#: voteit/motion/schemas.py:18 voteit/motion/schemas.py:173
 msgid "<Select>"
 msgstr "<Välj>"
 
@@ -35,29 +31,29 @@ msgstr "Inloggade kan läsa alla icke-utkast"
 msgid "Visible to everyone"
 msgstr "Synlig för alla"
 
-#: voteit/motion/schemas.py:28 voteit/motion/schemas.py:83
+#: voteit/motion/schemas.py:26 voteit/motion/schemas.py:100
 #: voteit/motion/plugins/preprocess/schemas.py:47
 #: voteit/motion/templates/motion_process.pt:24
 msgid "Title"
 msgstr "Titel"
 
-#: voteit/motion/schemas.py:32
+#: voteit/motion/schemas.py:29
 msgid "Description"
 msgstr "Beskrivning"
 
 #. Default: Short description, visible as lead-in and on searches.
-#: voteit/motion/schemas.py:34 voteit/motion/schemas.py:89
+#: voteit/motion/schemas.py:31
 msgid "schema_description"
 msgstr "Kort beskrivning, synlig som ingress och i sökresultat."
 
-#: voteit/motion/schemas.py:39 voteit/motion/schemas.py:94
+#: voteit/motion/schemas.py:38 voteit/motion/schemas.py:111
 msgid "Text body"
 msgstr "Brödtext"
 
 #. Default: This is the description text for participants in the motion
 #. process. It's always a good idea to include some basic instructions and
 #. important dates as when the process opens and closes.
-#: voteit/motion/schemas.py:41
+#: voteit/motion/schemas.py:40
 msgid "schema_body_description"
 msgstr ""
 "Beskrivningstext för deltagare i motionsprocessen. Det är alltid en bra ide "
@@ -69,8 +65,8 @@ msgid "Allow endorsements"
 msgstr "Tillåt stöd"
 
 #: voteit/motion/schemas.py:53
-msgid "Allow users to create sharing link"
-msgstr "Tillåt användare att skapa den delningslänk"
+msgid "Allow users to create a sharing link"
+msgstr "Tillåt användare att skapa en delningslänk"
 
 #. Default: If the motions are private, allow users to create sharing links to
 #. publish their motions to anyone.
@@ -80,261 +76,270 @@ msgstr ""
 "Om motionerna är privata, tillåt användare att skapa delningslänkar som gör "
 "dem synliga för vem som helst."
 
-#: voteit/motion/schemas.py:61
+#: voteit/motion/schemas.py:63
 msgid "Motion visibility"
 msgstr "Motioners synlighet"
 
-#: voteit/motion/schemas.py:69
+#: voteit/motion/schemas.py:70
+msgid "Allow any authenticated user to participate?"
+msgstr "Tillåt alla inloggade användare att delta?"
+
+#. Default: Note that anyone may write (and maybe support) a motion when the
+#. process is open when this is ticked.
+#: voteit/motion/schemas.py:71
+msgid "allow_any_description"
+msgstr ""
+"Notera att vem som helst kan skriva (och kanske stödja) en motion när "
+"processen är öppen och detta är påslaget."
+
+#. but required...
+#: voteit/motion/schemas.py:82
 msgid "Hashlists"
 msgstr "Hashlista"
 
 #. Default: Users in this hashlist may gain permission to participate
-#: voteit/motion/schemas.py:72
+#: voteit/motion/schemas.py:87
 msgid "hashlist_uids_schema_title"
 msgstr "Användare i denna hashlista kan få rättighet att delta"
 
 #. Default: Requires package arche_hashlist to work. Users will need to have
 #. their email address validated + pass a check against the hashlist.
-#: voteit/motion/schemas.py:74
+#: voteit/motion/schemas.py:91
 msgid "hashlist_uids_schema_description"
 msgstr ""
 "Kräver paketet arche_hashlist för att fungera. Användare måste ha sin "
 "epostadress validerad + genomgå en koll mot hashlistan."
 
-#: voteit/motion/schemas.py:87
-msgid "Short description"
-msgstr "Kort beskrivning"
-
-#: voteit/motion/schemas.py:96
+#: voteit/motion/schemas.py:113
 msgid "Your motion text, excluding proposals"
 msgstr "Din motionstext, exklusive förslag"
 
-#: voteit/motion/schemas.py:104
+#: voteit/motion/schemas.py:121
 msgid "Proposal"
 msgstr "Förslag"
 
-#: voteit/motion/schemas.py:107
+#: voteit/motion/schemas.py:124
 msgid "Proposals - add at least one"
 msgstr "Förslag - lägg till minst ett"
 
 #. Default: Proposals must be written in a way so it's possible to approve or
 #. deny each one. Don't give any background information or similar here.
-#: voteit/motion/schemas.py:108
+#: voteit/motion/schemas.py:125
 msgid "motion_proposals_schema_description"
 msgstr ""
 "Förslag måste skrivas så de går att bifalla eller avslå var för sig. Ge "
 "ingen bakgrundsinformation eller dylikt här."
 
-#: voteit/motion/schemas.py:123
+#: voteit/motion/schemas.py:142
 msgid "UserID"
 msgstr "AnvändarID"
 
-#: voteit/motion/schemas.py:129
+#: voteit/motion/schemas.py:148
 msgid "Other endorsements"
 msgstr "Andra som stödjer"
 
 #. Default: From people who doesn't have an account here or perhaps from other
 #. groups.
-#: voteit/motion/schemas.py:130
+#: voteit/motion/schemas.py:149
 msgid "written_endorsements_description"
 msgstr ""
 "Från människor som inte har ett konto här eller kanske från andra grupper."
 
-#: voteit/motion/schemas.py:179
+#: voteit/motion/schemas.py:204
 msgid ""
 "Export motions into a meeting. Each motion will be it's own agenda item."
 msgstr ""
 "Exportera motionerna in i ett möte. Varje motion blir sin egen "
 "dagordningspunkt."
 
-#: voteit/motion/schemas.py:182 voteit/motion/templates/motion_process.pt:93
+#: voteit/motion/schemas.py:209 voteit/motion/templates/motion_process.pt:93
 msgid "Export into meeting"
 msgstr "Exportera till möte"
 
 #. Default: You must be moderator in the meeting you wish to export to.
-#: voteit/motion/schemas.py:185
+#: voteit/motion/schemas.py:212
 msgid "export_meeting_schema_desc"
 msgstr "Du måste vara moderator i mötet du vill exportera till."
 
-#: voteit/motion/schemas.py:190
+#: voteit/motion/schemas.py:219
 msgid "Add all proposals as this user"
 msgstr "Lägg alla förslag som denna användare"
 
 #. Default: If you want to override the default behaviour to add proposals as
 #. the person who wrote them. Not recommended unless you have a good reason to
 #. do so!
-#: voteit/motion/schemas.py:191
+#: voteit/motion/schemas.py:220
 msgid "as_userid_schema_description"
 msgstr ""
 "Om du vill ändra standardbeteendet att lägga förslag som personen som skrev "
 "dem. Rekommenderas inte om du inte har en bra anledning att göra det!"
 
-#: voteit/motion/schemas.py:200
+#: voteit/motion/schemas.py:231
 msgid "Clear ownership of proposals?"
 msgstr "Rensa äganderollen från förslag?"
 
 #. Default: This makes the original author unable to retract their proposals.
 #. It will still be added in their name.
-#: voteit/motion/schemas.py:201
+#: voteit/motion/schemas.py:232
 msgid "clear_ownership_description"
 msgstr ""
 "Det gör att den som la förslaget inte kan dra tillbaka det. Förslaget läggs "
 "fortfarande i deras namn."
 
 #. Default: Give included users view permission within the meeting
-#: voteit/motion/schemas.py:208
+#: voteit/motion/schemas.py:240
 msgid "view_perm_schema_title"
 msgstr "Ge inkluderade användare rätt att läsa mötet"
 
 #. Default: If you're adding proposals as a specific user, the original
 #. creators will get the view permission from this setting.
-#: voteit/motion/schemas.py:211
+#: voteit/motion/schemas.py:244
 msgid "view_perm_schema_description"
 msgstr ""
 "Om du skapar förslag som en specifik användare så kommer "
 "ursprungsförfattaren få rätt att läsa mötet om denna inställning är påslagen."
 
-#: voteit/motion/schemas.py:218
+#: voteit/motion/schemas.py:253
 msgid "Include these states in the export"
 msgstr "Inkludera "
 
-#: voteit/motion/schemas.py:233
+#: voteit/motion/schemas.py:268
 msgid "Hashtag for Agenda Item"
 msgstr "Hashtag för dagordningspunkt"
 
 #. Default: Only used by systems that implement agenda based hashtags. It's
 #. usually a good idea to leave this empty if you don't have a special reason
 #. to change it.
-#: voteit/motion/schemas.py:234
+#: voteit/motion/schemas.py:269
 msgid "ai_hashtag_schema_description"
 msgstr ""
 "Används bara av system som kör dagordningsbaserade hashtaggar. Det är "
 "vanligtvis en bra idé att låta detta vara tomt om du inte har en bra "
 "anledning att ändra det."
 
-#: voteit/motion/schemas.py:240
+#: voteit/motion/schemas.py:277
 msgid "Must be a-z, 0-9, or any of '.-_'."
 msgstr "Måste vara a-z, 0-9, eller någon av ’.-_’."
 
-#: voteit/motion/security.py:9
-msgid "Participate motion proc."
-msgstr "Delta motionsproc."
+#: voteit/motion/workflows.py:30
+msgid "Motion process workflow"
+msgstr "Arbetetsflöde för motionsprocess"
 
-#: voteit/motion/views.py:66
+#: voteit/motion/workflows.py:31
+msgid "Private"
+msgstr "Privat"
+
+#: voteit/motion/workflows.py:31
+msgid "Open"
+msgstr "Öppen"
+
+#: voteit/motion/workflows.py:31
+msgid "Closed"
+msgstr "Stängd"
+
+#: voteit/motion/workflows.py:52
+msgid "Make private"
+msgstr "Gör privat"
+
+#: voteit/motion/workflows.py:60
+msgid "Close process"
+msgstr "Stäng processen"
+
+#: voteit/motion/workflows.py:68
+msgid "Open process"
+msgstr "Öppna processen"
+
+#: voteit/motion/workflows.py:74
+msgid "Motion workflow"
+msgstr "Arbetsflöde för motion"
+
+#: voteit/motion/workflows.py:76
+msgid "Draft"
+msgstr "Utkast"
+
+#: voteit/motion/workflows.py:77
+msgid "Under review"
+msgstr "Granskas"
+
+#: voteit/motion/workflows.py:78
+msgid "Awaiting endorsements"
+msgstr "Inväntar stöd"
+
+#: voteit/motion/workflows.py:79
+msgid "Lacked enough endorsements"
+msgstr "Saknade tillräckligt stöd"
+
+#: voteit/motion/workflows.py:80
+msgid "Has enough endorsements"
+msgstr "Har tillräckligt med stöd"
+
+#: voteit/motion/resources.py:35
+msgid "Motion process"
+msgstr "Motionsprocess"
+
+#: voteit/motion/resources.py:60
+msgid "Motion"
+msgstr "Motion"
+
+#: voteit/motion/views.py:69
 msgid "Export"
 msgstr "Exportera"
 
 #. Default: Created ${ai} agenda items and ${prop} proposals within this
 #. meeting.
-#: voteit/motion/views.py:81
+#: voteit/motion/views.py:86
 msgid "export_success_message"
 msgstr "Skapade ${ai} dagordningspunkter och ${prop} förslag i detta möte."
 
-#: voteit/motion/views.py:113
+#: voteit/motion/views.py:124
 msgid "(Unknown)"
 msgstr "(Okänd)"
 
 #. Default: Sharing enalbed - use the link below.
-#: voteit/motion/views.py:134
+#: voteit/motion/views.py:150
 msgid "sharing_switched_on"
 msgstr "Delning påslaget - använd länken som skapades nedan."
 
 #. Default: Sharing switched off - motion not accessible unless you're logged
 #. in.
-#: voteit/motion/views.py:139
+#: voteit/motion/views.py:159
 msgid "sharing_switched_off"
 msgstr ""
 "Delning avstängd - motionen är inte tillgänglig om du inte är inloggad."
 
 #. Default: You're now endorsing this motion.
-#: voteit/motion/views.py:154
+#: voteit/motion/views.py:178
 msgid "youre_now_endorsing"
 msgstr "Du stödjer nu denna motion."
 
 #. Default: You're no longer endorsing this motion.
-#: voteit/motion/views.py:161
+#: voteit/motion/views.py:186
 msgid "your_endorsement_removed"
 msgstr "Du stödjer inte längre motionen."
 
-#: voteit/motion/views.py:178
-msgid "Must be logged in"
-msgstr "Måste vara inloggad"
-
-#: voteit/motion/views.py:180
-msgid "You need to have a validated email address to use this. "
-msgstr "Du behöver ha en validerad epostadress för att använda detta."
-
 #. Default: You've been granted access to add motions (if process is open) and
 #. to endorse motions.
-#: voteit/motion/views.py:191
+#: voteit/motion/views.py:197
 msgid "granted_access_message"
 msgstr ""
 "Du har blivit tilldelad rättigheter för att lägga till motioner (om "
 "processen är öppen) för för att stödja motioner."
 
+#: voteit/motion/views.py:211 voteit/motion/views.py:249
+msgid "Must be logged in"
+msgstr "Måste vara inloggad"
+
+#: voteit/motion/views.py:214
+msgid "You need to have a validated email address to use this. "
+msgstr "Du behöver ha en validerad epostadress för att använda detta."
+
 #. Default: We couldn't find your email address. Please contact the
 #. organisation responsible for this process to gain access.
-#: voteit/motion/views.py:196
+#: voteit/motion/views.py:233
 msgid "not_found_when_checked_against_hashlist"
 msgstr ""
 "Vi hittade inte din epostadress i registret. Kontakta organisationen som är "
 "ansvarig för processen för att få access."
-
-#: voteit/motion/workflows.py:21
-msgid "Motion process workflow"
-msgstr "Arbetetsflöde för motionsprocess"
-
-#: voteit/motion/workflows.py:22
-msgid "Private"
-msgstr "Privat"
-
-#: voteit/motion/workflows.py:23
-msgid "Open"
-msgstr "Öppen"
-
-#: voteit/motion/workflows.py:24
-msgid "Closed"
-msgstr "Stängd"
-
-#: voteit/motion/workflows.py:45
-msgid "Make private"
-msgstr "Gör privat"
-
-#: voteit/motion/workflows.py:53
-msgid "Close process"
-msgstr "Stäng processen"
-
-#: voteit/motion/workflows.py:61
-msgid "Open process"
-msgstr "Öppna processen"
-
-#: voteit/motion/workflows.py:67
-msgid "Motion workflow"
-msgstr "Arbetsflöde för motion"
-
-#: voteit/motion/workflows.py:68
-msgid "Draft"
-msgstr "Utkast"
-
-#: voteit/motion/workflows.py:69
-msgid "Under review"
-msgstr "Granskas"
-
-#: voteit/motion/workflows.py:70
-msgid "Awaiting endorsements"
-msgstr "Inväntar stöd"
-
-#: voteit/motion/workflows.py:71
-msgid "Lacked enough endorsements"
-msgstr "Saknade tillräckligt stöd"
-
-#: voteit/motion/workflows.py:72
-msgid "Has enough endorsements"
-msgstr "Har tillräckligt med stöd"
-
-#: voteit/motion/plugins/preprocess/portlet.py:13
-msgid "Preprocess Motion"
-msgstr "Förprocess motion"
 
 #: voteit/motion/plugins/preprocess/schemas.py:15
 msgid "ID of the option"
@@ -412,6 +417,10 @@ msgstr "CSS-klass för ikon"
 msgid "Choose"
 msgstr "Välj"
 
+#: voteit/motion/plugins/preprocess/portlet.py:13
+msgid "Preprocess Motion"
+msgstr "Förprocess motion"
+
 #: voteit/motion/plugins/preprocess/views.py:72
 msgid "Saved"
 msgstr "Sparad"
@@ -419,21 +428,6 @@ msgstr "Sparad"
 #: voteit/motion/plugins/preprocess/views.py:78
 msgid "Settings removed"
 msgstr "Inställningar borttagna"
-
-#: voteit/motion/plugins/preprocess/templates/all_results.pt:8
-#: voteit/motion/plugins/preprocess/templates/all_results.pt:33
-#: voteit/motion/plugins/preprocess/templates/results.pt:8
-#: voteit/motion/plugins/preprocess/templates/results.pt:33
-msgid "Close"
-msgstr "Stäng"
-
-#: voteit/motion/plugins/preprocess/templates/all_results.pt:9
-msgid "All results"
-msgstr "Alla resultat"
-
-#: voteit/motion/plugins/preprocess/templates/all_results.pt:13
-msgid "Showing all agenda items with results."
-msgstr "Visar alla punkter på dagordningen med resultat."
 
 #: voteit/motion/plugins/preprocess/templates/portlet.pt:27
 #: voteit/motion/plugins/preprocess/templates/results.pt:11
@@ -444,9 +438,24 @@ msgstr "Resultat"
 msgid "Process not open"
 msgstr "Processen är inte öppen"
 
+#: voteit/motion/plugins/preprocess/templates/results.pt:8
+#: voteit/motion/plugins/preprocess/templates/results.pt:33
+#: voteit/motion/plugins/preprocess/templates/all_results.pt:8
+#: voteit/motion/plugins/preprocess/templates/all_results.pt:33
+msgid "Close"
+msgstr "Stäng"
+
 #: voteit/motion/plugins/preprocess/templates/results.pt:15
 msgid "Show all results"
 msgstr "Visa alla resultat"
+
+#: voteit/motion/plugins/preprocess/templates/all_results.pt:9
+msgid "All results"
+msgstr "Alla resultat"
+
+#: voteit/motion/plugins/preprocess/templates/all_results.pt:13
+msgid "Showing all agenda items with results."
+msgstr "Visar alla punkter på dagordningen med resultat."
 
 #. Default: Check your permissions to participate in the motion process.
 #: voteit/motion/templates/check_email.pt:9
@@ -609,6 +618,13 @@ msgstr "Du behöver vara inloggad för att delta i motionsprocessen!"
 #: voteit/motion/templates/motion_process.pt:86
 msgid "Add motion"
 msgstr "Lägg till motion"
+
+#: voteit/motion/templates/allow_any_btn.pt:11
+msgid "Click to gain access to write (or endorse) motions"
+msgstr "Klicka för att få tillgång till att skriva (eller stödja) motioner"
+
+#~ msgid "Short description"
+#~ msgstr "Kort beskrivning"
 
 #~ msgid "Set as draft"
 #~ msgstr "Sätt som utkast"
