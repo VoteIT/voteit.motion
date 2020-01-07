@@ -1,4 +1,3 @@
-from arche.utils import generate_slug
 from arche.views.base import BaseForm
 from arche.views.base import BaseView
 from arche.views.base import DefaultEditForm
@@ -8,10 +7,9 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid.httpexceptions import HTTPNotFound
 from pyramid.renderers import render
 from pyramid.security import NO_PERMISSION_REQUIRED
-from pyramid.traversal import find_interface, resource_path
+from pyramid.traversal import find_interface
 from pyramid.view import view_config
 from pyramid.view import view_defaults
-from repoze.catalog.query import Eq
 from voteit.core.security import CHANGE_WORKFLOW_STATE
 from voteit.core.security import EDIT
 from voteit.core.security import DELETE
@@ -40,9 +38,10 @@ from voteit.motion.security import ROLE_MOTION_PROCESS_PARTICIPANT
 class MotionProcessView(BaseView):
 
     def __call__(self):
+
         return {'can_add_motion':  self.request.has_permission(ADD_MOTION, self.context),
                 'can_manage': self.request.has_permission(MANAGE_SERVER, self.context),
-                'check_email_snippet': render_check_email_snippet(self.context, self.request)}
+                'access_snippet': render_access_snippet(self.context, self.request)}
 
     def get_motions(self):
         res = []
@@ -109,7 +108,7 @@ class MotionView(BaseView):
                 'can_endorse': self.request.authenticated_userid not in self.context.creator and
                                self.request.has_permission(ENDORSE_MOTION, self.context),
                 'can_enable_sharing': self.request.has_permission(ENABLE_MOTION_SHARING, self.context),
-                'check_email_snippet': render_check_email_snippet(self.context, self.request),
+                'access_snippet': render_access_snippet(self.context, self.request),
                 'motion_visibility': dict(MOTION_VISIBILITY).get(motion_process.motion_visibility, _("(Unknown)")),
                 }
 
@@ -166,6 +165,10 @@ class MotionView(BaseView):
         return HTTPFound(location=self.request.resource_url(self.context))
 
 
+_GRANTED_ACCESS_MSG = _("granted_access_message",
+                        default="You've been granted access to add motions "
+                                "(if process is open) and to endorse motions.")
+
 @view_config(
     context=IMotionProcess,
     name='check_email',
@@ -186,12 +189,9 @@ class CheckAgainstHashlistView(BaseView):
         for uid in self.context.hashlist_uids:
             hashlist = self.request.resolve_uid(uid, perm=None)
             res = hashlist.check(profile.email)
-            if res == True:
+            if res is True:
                 self.context.local_roles.add(profile.userid, ROLE_MOTION_PROCESS_PARTICIPANT)
-                self.flash_messages.add(_("granted_access_message",
-                                          default="You've been granted access to add motions "
-                                          "(if process is open) and to endorse motions."),
-                                        type="success", auto_destruct=False)
+                self.flash_messages.add(_GRANTED_ACCESS_MSG, type="success", auto_destruct=False)
                 return response
         self.flash_messages.add(_("not_found_when_checked_against_hashlist",
                                   default="We couldn't find your email address. "
@@ -201,24 +201,59 @@ class CheckAgainstHashlistView(BaseView):
         return response
 
 
-def render_check_email_snippet(context, request):
-    mp = find_interface(context, IMotionProcess)
+@view_config(
+    context=IMotionProcess,
+    name='immediate_access')
+class ImmediateAccessView(BaseView):
+
+    def __call__(self):
+        userid = self.request.authenticated_userid
+        if not userid:
+            raise HTTPForbidden(_("Must be logged in"))
+
+        came_from = self.request.GET.get('came_from', None)
+        if came_from:
+            response = HTTPFound(location=came_from)
+        else:
+            response = HTTPFound(location=self.request.resource_url(self.context))
+
+        self.context.local_roles.add(userid, ROLE_MOTION_PROCESS_PARTICIPANT)
+        self.flash_messages.add(_GRANTED_ACCESS_MSG, type="success", auto_destruct=False)
+        return response
+
+
+def render_access_snippet(context, request):
+    if request.authenticated_userid is not None:
+        mp = find_interface(context, IMotionProcess)
+        if mp.wf_state == 'closed':
+            return
+        if not ROLE_MOTION_PROCESS_PARTICIPANT in mp.local_roles.get(request.authenticated_userid, ()):
+            if getattr(context, 'sharing_token', None):
+                came_from = request.resource_url(context, '_ts', context.sharing_token)
+            else:
+                came_from = request.resource_url(context)
+            if mp.allow_any_authenticated:
+                return render_allow_authenticated_snippet(mp, request, came_from)
+            else:
+                return render_check_email_snippet(mp, request, came_from)
+
+
+def render_check_email_snippet(mp, request, came_from):
     if not mp.hashlist_uids:
-        #Nothing to do
+        # Nothing to do
         return ''
-    if request.profile is None:
-        return ''
-    already_has_role = ROLE_MOTION_PROCESS_PARTICIPANT in mp.local_roles.get(request.authenticated_userid, ())
-    if getattr(context, 'sharing_token', None):
-        came_from = request.resource_url(context, '_ts', context.sharing_token)
-    else:
-        came_from = request.resource_url(context)
-    values = {'context': context,
-              'can_check': request.has_permission(CHECK_EMAIL_AGAINST_HASHLIST, mp) and
-                           not already_has_role and request.profile.email_validated,
+    values = {'can_check': request.has_permission(CHECK_EMAIL_AGAINST_HASHLIST, mp) and request.profile.email_validated,
               'check_url': request.resource_url(mp, 'check_email',
                                                 query={'came_from': came_from})}
     return render('voteit.motion:templates/check_email.pt', values, request=request)
+
+
+def render_allow_authenticated_snippet(mp, request, came_from):
+    values = {
+        'access_url': request.resource_url(mp, 'immediate_access', query={'came_from': came_from}),
+        'came_from': came_from,
+    }
+    return render('voteit.motion:templates/allow_any_btn.pt', values, request=request)
 
 
 def includeme(config):

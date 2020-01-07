@@ -24,7 +24,7 @@
     </tal:ts>
     </p>
     <p>
-        <a href="${request.resource_url(request.profile, 'validate_email', query={'came_from': request.resource_url(context)})}"
+        <a href="${request.resource_url(request.profile, 'validate_email', query={'came_from': came_from})}"
             class="btn btn-success">
             <span class="glyphicon glyphicon-envelope"></span>
             <tal:ts i18n:translate="">Validate email</tal:ts>

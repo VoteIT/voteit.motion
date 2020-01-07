@@ -1,0 +1,15 @@
+<tal:main xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="voteit.motion">
+
+<div>
+    <hr/>
+    <p>
+        <a href="${access_url}" class="btn btn-success"
+           i18n:translate="">Click to gain access to write (or endorse) motions</a>
+    </p>
+</div>
+
+</tal:main>

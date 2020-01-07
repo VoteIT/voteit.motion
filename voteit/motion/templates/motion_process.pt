@@ -76,7 +76,7 @@
         To participate in the motion process, you need to be logged in!
     </p>
 
-    <p tal:condition="check_email_snippet" tal:content="structure check_email_snippet">Check email btn</p>
+    <p tal:condition="access_snippet" tal:content="structure access_snippet">Check access snippet</p>
 
     <p>
         <a tal:condition="can_add_motion"

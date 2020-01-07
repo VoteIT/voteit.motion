@@ -50,7 +50,7 @@ class MotionProcessSchema(colander.Schema):
     )
     allow_sharing_link = colander.SchemaNode(
         colander.Bool(),
-        title=_("Allow users to create sharing link"),
+        title=_("Allow users to create a sharing link"),
         description=_("allow_sharing_link_schema_description",
                       default="If the motions are private, "
                               "allow users to create sharing links to "
@@ -60,6 +60,16 @@ class MotionProcessSchema(colander.Schema):
         colander.String(),
         title=_("Motion visibility"),
         widget=deform.widget.SelectWidget(values=MOTION_VISIBILITY)
+    )
+    allow_any_authenticated = colander.SchemaNode(
+        colander.Bool(),
+        default=False,
+        missing=False,
+        title=_("Allow any authenticated user to participate?"),
+        description=_("allow_any_description",
+                      default="Note that anyone may write (and maybe support) a motion when the process "
+                              "is open when this is ticked."),
+
     )
     hashlist_uids = colander.SchemaNode(
         colander.Sequence(),

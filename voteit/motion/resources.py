@@ -38,6 +38,7 @@ class MotionProcess(Content, ContextACLMixin, LocalRolesMixin):
     body = ""
     allow_endorsements = False
     allow_sharing_link = False
+    allow_any_authenticated = False
     motion_visibility = 'hidden'
     _hashlist_uids = ()
 
