@@ -13,6 +13,9 @@ class PreprocessPortlet(PortletType):
     title = _("Preprocess Motion")
     tpl = "voteit.motion.plugins.preprocess:templates/portlet.pt"
 
+    def visible(self, context, request, view, **kwargs):
+        return True
+
     def render(self, context, request, view, **kwargs):
         settings = self.portlet.settings
         response = {'title': settings.get('title', self.title),
